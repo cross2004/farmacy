@@ -63,6 +63,8 @@ public class LoginController {
 			modelAndView.setViewName("registration");
 
 		}
+		//ModelAndView modelAndView1 = new ModelAndView("redirect:/login");
+		
 		return modelAndView;
 	}
 
@@ -77,18 +79,18 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/doctor/doctor", method = RequestMethod.GET)
-	public ModelAndView doctor() {
+	
+	@RequestMapping(value = "/helpdesk/helpDesk", method = RequestMethod.GET)
+	public ModelAndView helpDesk() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", "Bine ai venit " + user.getName() + " " + user.getLastName());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("doctor/doctor");
+		modelAndView.setViewName("helpdesk/helpDesk");
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "/doctor/doctor", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/doctor/doctor", method = RequestMethod.POST)
 	public ModelAndView doctorsActions(@Valid Doctor doctor,
 			@RequestParam(value = "action", required = true) String action) {
 		/*
@@ -109,8 +111,8 @@ public class LoginController {
 		 * // do another thing } // model.addAttribute("attribute",
 		 * "forwardWithForwardPrefix");
 		 */
-		ModelAndView modelAndView = new ModelAndView("redirect:/doctor/doctor.html");
+	/*	ModelAndView modelAndView = new ModelAndView("redirect:/login");
 		return modelAndView;
 		
-	}
+	}*/
 }
