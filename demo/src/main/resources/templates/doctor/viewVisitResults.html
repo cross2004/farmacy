@@ -6,7 +6,6 @@
 	<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	
 <head>
 	<title>Spring Security Tutorial</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
@@ -15,9 +14,7 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  	
 </head>
-<body>
-Pacienti inregistrati:
-
+	
 <table border =1>
   <tr><td >CNP</td> 
         <td >First Name</td> 
@@ -25,16 +22,13 @@ Pacienti inregistrati:
         <td >Active</td> 
         <td >Details</td>
         <td> Edit pacient </a></td>   </tr>
-        
-<th:block th:each="Pacient : ${listAll}">
+        <th:block th:each="Pacient : ${viewVisitResults}">
         <tr><td th:text="${Pacient.cnp}"> CNP </td> 
         <td th:text="${Pacient.firstName}"> First Name</td> 
         <td th:text="${Pacient.lastName}"> Last Name</td> 
         <td th:text="${Pacient.active}">Active</td> 
         <td th:text="${Pacient.details}">Details</td>
-        <td>  <a href="viewVisitResults.html" th:text="${Pacient.id}">ID</a></td>  
-         <td> <a href="viewVisitResults.html">Vezi detalii consultatii</a></td>   </tr>
+      
      </th:block>
 </table>
-</body>
-</html>
+

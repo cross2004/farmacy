@@ -1,14 +1,11 @@
 package com.example.controller;
 
-import java.util.Arrays;
-import java.util.Set;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.model.User;
-import com.example.model.Role;
-import com.example.model.Doctor;
 import com.example.model.Pacient;
 import com.example.service.UserService;
 import com.example.service.PacientService;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class DoctorController {
@@ -94,11 +88,22 @@ public class DoctorController {
 		modelAndView.setViewName("doctor/editPacientData");
 		return modelAndView;
 	}
+
 	@RequestMapping(value = "/doctor/viewPacients", method = RequestMethod.GET)
 	public ModelAndView viewPacients() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("listVisits", pacientService.viewPacients());
+	 //	modelAndView.addObject("/doctor/viewPacients", pacientService.findAll());
+	 	modelAndView.addObject("listAll",  pacientService.findAll());
+		modelAndView.setViewName("doctor/viewPacients");
+		
 		return modelAndView;
 	}
+	@RequestMapping(value = "/doctor/viewVisitResults", method = RequestMethod.GET)
+	public ModelAndView viewVisitResults(@Valid Pacient pacient, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.addObject("viewVisitResults",  pacientService.viewVisitResults(pacient.getId()));
+		modelAndView.setViewName("doctor/viewVisitResults");
 		
+		return modelAndView;
+	}
 }

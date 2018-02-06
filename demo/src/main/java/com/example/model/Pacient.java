@@ -5,18 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
 import org.hibernate.validator.constraints.NotEmpty;
-
 import java.util.Date;
-
 @Entity
-@NamedQuery(name="Pacient.findAll", query="SELECT firstName FROM Pacient") 
+@NamedQueries({
+@NamedQuery(name="findAll",query="SELECT c FROM Pacient c")})
 
 @Table(name = "pacient")
-public class Pacient {
+public class Pacient{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "pacient_id")
@@ -117,5 +116,5 @@ public class Pacient {
 	public void setActive(int active) {
 		this.active = active;
 	}
-
+	
 }
