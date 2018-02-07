@@ -12,7 +12,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.util.Date;
 @Entity
 @NamedQueries({
-@NamedQuery(name="findAll",query="SELECT c FROM Pacient c")})
+@NamedQuery(name="findAll",query="SELECT p FROM Pacient p")}
+)
 
 @Table(name = "pacient")
 public class Pacient{

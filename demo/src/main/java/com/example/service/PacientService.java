@@ -9,7 +9,8 @@ public Pacient findPacientByCnp(String cnp);
 public void savePacient(Pacient pacient);
 public void inactivatePacient(Pacient pacient);
 public void editPacient(Pacient pacient);
-//public List<Pacient> viewPacients();
 public List<Pacient> findAll(); 
-public Pacient viewVisitResults(int id);
+public Pacient viewVisitResults(int id); 
+public Pacient editPacient(int id); 
+
 }

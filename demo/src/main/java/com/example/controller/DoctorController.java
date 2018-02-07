@@ -1,6 +1,5 @@
 package com.example.controller;
 
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -92,18 +91,35 @@ public class DoctorController {
 	@RequestMapping(value = "/doctor/viewPacients", method = RequestMethod.GET)
 	public ModelAndView viewPacients() {
 		ModelAndView modelAndView = new ModelAndView();
-	 //	modelAndView.addObject("/doctor/viewPacients", pacientService.findAll());
-	 	modelAndView.addObject("listAll",  pacientService.findAll());
+		modelAndView.addObject("listAll", pacientService.findAll());
 		modelAndView.setViewName("doctor/viewPacients");
-		
+
 		return modelAndView;
 	}
+
 	@RequestMapping(value = "/doctor/viewVisitResults", method = RequestMethod.GET)
-	public ModelAndView viewVisitResults(@Valid Pacient pacient, BindingResult bindingResult) {
+	public ModelAndView viewVisitResults(int id) {
 		ModelAndView modelAndView = new ModelAndView();
-    	modelAndView.addObject("viewVisitResults",  pacientService.viewVisitResults(pacient.getId()));
+		modelAndView.addObject("viewVisitResults", pacientService.viewVisitResults(id));
 		modelAndView.setViewName("doctor/viewVisitResults");
-		
+
 		return modelAndView;
 	}
+
+	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.GET)
+	public ModelAndView editPacient(int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("editPacient", pacientService.editPacient(id));
+		modelAndView.setViewName("doctor/editPacient");
+
+		return modelAndView;
+	}
+	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
+	public ModelAndView editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+		pacientService.savePacient(pacient);
+		modelAndView.setViewName("doctor/editPacient");
+		return modelAndView;
+	}
+		
 }

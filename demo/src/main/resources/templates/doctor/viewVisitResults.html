@@ -21,14 +21,12 @@
         <td >Last Name</td> 
         <td >Active</td> 
         <td >Details</td>
-        <td> Edit pacient </a></td>   </tr>
-        <th:block th:each="Pacient : ${viewVisitResults}">
-        <tr><td th:text="${Pacient.cnp}"> CNP </td> 
-        <td th:text="${Pacient.firstName}"> First Name</td> 
-        <td th:text="${Pacient.lastName}"> Last Name</td> 
-        <td th:text="${Pacient.active}">Active</td> 
-        <td th:text="${Pacient.details}">Details</td>
-      
-     </th:block>
+          </tr>    
+        <tr><td th:text="${viewVisitResults.cnp}"> CNP </td> 
+        <td th:text="${viewVisitResults.firstName}"> First Name</td> 
+        <td th:text="${viewVisitResults.lastName}"> Last Name</td> 
+        <td th:text="${viewVisitResults.active}">Active</td> 
+        <td th:text="${viewVisitResults.details}">Details</td></tr>
+          
 </table>
 

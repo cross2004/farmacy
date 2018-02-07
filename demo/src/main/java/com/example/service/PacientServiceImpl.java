@@ -78,37 +78,14 @@ public class PacientServiceImpl implements PacientService {
 	
 	@Override
 	public Pacient viewVisitResults(int id) {
-		// TODO Auto-generated method stub
-		return pacientRepository.findById(id);
+		return pacientRepository.viewVisitResults(id);
 
 	}
-	
-	/*@Override
-	@Transactional
-	public List<Pacient> viewPacients() {
-		// .setParameter("custName", name)
-		// TypedQuery<Pacient> query = em.createNamedQuery("Pacient.findAll",
-		// Pacient.class);
-		javax.persistence.Query query;
-		em.getTransaction().begin();
+	@Override
+	public Pacient editPacient(int id) {
+		return pacientRepository.editPacient(id);
 
-		query = em.createQuery("SELECT c.cnp FROM Pacient c ");
-		List<Pacient> lista;
-		lista = query.getResultList();
-		//em.getTransaction().commit();
-		return lista;
-		}
-*/
-		/*
-		 * List<Object[]> listePublication; Query q; em.getTransaction().begin();
-		 * q=em.createQuery("SELECT c.titrePublication, c.datePublication,
-		 * c.corps,p.login FROM Publication c JOIN c.employee p "); listePublication =
-		 * q.getResultList(); //ArrayList<Publication> results = new
-		 * ArrayList<Publication>(); //for (Object[] resultat : listePublication)
-		 * //results.add((Publication) resultat[0]);
-		 */
-		// em.getTransaction().commit();
-		// return results;*/
+	}
 	
 
 }
