@@ -2,6 +2,7 @@ package com.example.service;
 import java.util.List;
 
 import com.example.model.Pacient;
+import com.example.model.Results;
 
 public interface PacientService {
 public Pacient findById(int id);
@@ -10,7 +11,12 @@ public void savePacient(Pacient pacient);
 public void inactivatePacient(Pacient pacient);
 public void editPacient(Pacient pacient);
 public List<Pacient> findAll(); 
-public Pacient viewVisitResults(int id); 
+public Results viewVisitResults(int id); 
+public void addResult(Results result); 
 public Pacient editPacient(int id); 
+public Results addVisitResult(int id); 
+public void saveResult(int id, Results result); 
+public List<Pacient> findPacientsSuggestedDate();
+
 
 }

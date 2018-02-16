@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.model.User;
 import com.example.model.Pacient;
+import com.example.model.Results;
+import com.example.model.Schedule;
 import com.example.service.UserService;
 import com.example.service.PacientService;
+import com.example.service.ScheduleService;
 
 @Controller
 public class DoctorController {
@@ -22,7 +25,11 @@ public class DoctorController {
 	private UserService userService;
 	@Autowired
 	private PacientService pacientService;
-
+	@Autowired
+	private PacientService resultsService;
+	@Autowired
+	private ScheduleService scheduleService;
+	
 	@RequestMapping(value = "/doctor/doctor", method = RequestMethod.GET)
 	public ModelAndView doctor() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -33,17 +40,27 @@ public class DoctorController {
 		modelAndView.setViewName("doctor/doctor");
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "/doctor/viewSchedule", method = RequestMethod.GET)
-	public ModelAndView viewSchedule() {
+	
+	@RequestMapping(value = "/doctor/doctor2", method = RequestMethod.GET)
+	public ModelAndView doctor2() {
 		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Bine ai venit " + user.getName() + " " + user.getLastName());
-		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("doctor/viewSchedule");
+	//	modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+		modelAndView.setViewName("doctor/doctor2");
 		return modelAndView;
 	}
+	
+	
+
+	@RequestMapping(value = "/doctor/viewPacients", method = RequestMethod.GET)
+	public ModelAndView viewPacients() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("listAll", pacientService.findAll());
+		modelAndView.setViewName("doctor/viewPacients");
+
+		return modelAndView;
+	}
+
+	
 
 	@RequestMapping(value = "/doctor/addNewPacient", method = RequestMethod.GET)
 	public ModelAndView addNewPacient() {
@@ -77,35 +94,6 @@ public class DoctorController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/doctor/editPacientData", method = RequestMethod.GET)
-	public ModelAndView editPacientData() {
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Bine ai venit " + user.getName() + " " + user.getLastName());
-		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("doctor/editPacientData");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/doctor/viewPacients", method = RequestMethod.GET)
-	public ModelAndView viewPacients() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("listAll", pacientService.findAll());
-		modelAndView.setViewName("doctor/viewPacients");
-
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/doctor/viewVisitResults", method = RequestMethod.GET)
-	public ModelAndView viewVisitResults(int id) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("viewVisitResults", pacientService.viewVisitResults(id));
-		modelAndView.setViewName("doctor/viewVisitResults");
-
-		return modelAndView;
-	}
-
 	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.GET)
 	public ModelAndView editPacient(int id) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -114,12 +102,29 @@ public class DoctorController {
 
 		return modelAndView;
 	}
-	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
-	public ModelAndView editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
+
+	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.GET)
+	public ModelAndView addVisitResult(int id) {
 		ModelAndView modelAndView = new ModelAndView();
-		pacientService.savePacient(pacient);
-		modelAndView.setViewName("doctor/editPacient");
+		Pacient pacient = pacientService.findById(id);
+		Results result = new Results();
+		modelAndView.addObject("pacientTR", pacient);
+		modelAndView.addObject("addVisitResult", result);
+		modelAndView.setViewName("doctor/addVisitResult");
 		return modelAndView;
 	}
-		
+
+	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
+	public String editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
+		pacientService.savePacient(pacient);
+		return "redirect:viewPacients";
+	}
+
+	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.POST)
+	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult,@Valid Results result) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = pacient.getId();
+		pacientService.saveResult(id, result);		
+		return "redirect:viewPacients";
+	}
 }

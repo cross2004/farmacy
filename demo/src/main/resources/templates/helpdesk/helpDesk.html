@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<title> Alexandra Tarchila
+	</title>
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	
+</head>
+<body>
+
+<a href = "/helpdesk/addAppointment">addAppointment</a>
+<a href = "/helpdesk/viewScheduleAll">view Schedule</a>
+<a href = "/helpdesk/viewMaterials">view materials</a>
+<a href = "/helpdesk/addMaterials">addmaterials</a>
+
+
+<table border =1>
+  <tr><td >CNP</td> 
+        <td >First Name</td> 
+        <td >Last Name</td> 
+        <td >Active</td> 
+        <td >Details</td>
+        <td> Edit pacient </a></td>   </tr>
+        
+<th:block th:each="Pacient : ${findPacientsSuggestedDate}">
+ 		<tr><td th:text="${Pacient.id}"> ID </td> 
+        <tr><td th:text="${Pacient.cnp}"> CNP </td> 
+        <td th:text="${Pacient.firstName}"> First Name</td> 
+        <td th:text="${Pacient.lastName}"> Last Name</td> 
+        <td th:text="${Pacient.active}">Active</td> 
+        <td th:text="${Pacient.details}">Details</td>
+       </tr>
+     </th:block>
+</table>
+
+
+
+</body>
+</html>

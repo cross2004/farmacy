@@ -1,15 +1,21 @@
 package com.example.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 import java.util.Date;
+import java.util.Set;
 @Entity
 @NamedQueries({
 @NamedQuery(name="findAll",query="SELECT p FROM Pacient p")}
@@ -45,6 +51,10 @@ public class Pacient{
 	@Column(name = "cnp")
 	@NotEmpty(message = "*Please provide CNP")
 	private String cnp;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "pacient_results", joinColumns = @JoinColumn(name = "pacient_id"), inverseJoinColumns = @JoinColumn(name = "results_id"))
+	private Set<Results> results;
 
 	
 	public int getId() {
@@ -117,5 +127,13 @@ public class Pacient{
 	public void setActive(int active) {
 		this.active = active;
 	}
-	
+	public Set<Results> getResults() {
+		
+		return results;
+	}
+
+	public void setResults(Set<Results> results) {
+		this.results = results;
+	}
+
 }

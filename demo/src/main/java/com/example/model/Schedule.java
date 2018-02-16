@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 
 @Table(name = "schedule")
@@ -24,31 +27,39 @@ public class Schedule {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "pacient_idid")
-	private int pacient_id;
+	@Column(name = "pacient_id")
+	private int pacientId;
 	
 	@Column(name = "doctor_id")
-	private int doctor_id;
+	private int doctorId;
 	
 	@Column(name = "details")
 	private String details;
-	@Column(name = "data")
-	private Date data;
+	
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
+	@Column(name = "startTime")
+	private Date startTime;
 
-	public int getDoctorID() {
-		return doctor_id;
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
+	@Column(name = "endTime")
+	private Date endTime;
+
+	
+	public int getDoctorId() {
+		return doctorId;
 	}
 
-	public void setDoctorID(int doctor_id) {
-		this.doctor_id = doctor_id;
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
 
-	public int getPacientID() {
-		return pacient_id;
+	public int getPacientId() {
+		return pacientId;
 	}
 
-	public void setPacientID(int pacient_id) {
-		this.pacient_id = pacient_id;
+	public void setPacientId(int pacientId) {
+		this.pacientId = pacientId;
 	}
 
 	public String getDetails() {
@@ -59,11 +70,20 @@ public class Schedule {
 		this.details = details;
 	}
 
-	public Date getLastDate() {
-		return data;
+
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setLastDate(Date data) {
-		this.data = data;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 }

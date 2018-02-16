@@ -1,7 +1,10 @@
 package com.example.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
@@ -13,13 +16,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.model.Pacient;
+import com.example.model.Results;
+import com.example.model.Role;
 import com.example.model.User;
 import com.example.repository.PacientRepository;
+import com.example.repository.ResultsRepository;
 
 @Service("pacientService")
 public class PacientServiceImpl implements PacientService {
 	@Autowired
 	private PacientRepository pacientRepository;
+	@Autowired
+	private ResultsRepository resultsRepository;
 
 	protected EntityManager em;
 
@@ -61,31 +69,59 @@ public class PacientServiceImpl implements PacientService {
 	public Pacient findById(int id) {
 		// TODO Auto-generated method stub
 		return pacientRepository.findById(id);
-
 	}
-
+	
 	@Override
 	public Pacient findPacientByCnp(String cnp) {
 		return pacientRepository.findByCnp(cnp);
 	}
-
-	@Override
-	public List<Pacient> findAll() {
-	      return (List<Pacient>) em.createNamedQuery("findAll", Pacient.class).getResultList();
-	  
-	}
-
 	
 	@Override
-	public Pacient viewVisitResults(int id) {
+	public List<Pacient> findAll() {
+		return (List<Pacient>) em.createNamedQuery("findAll", Pacient.class).getResultList();
+
+	}
+
+	@Override
+	public Results viewVisitResults(int id) {
 		return pacientRepository.viewVisitResults(id);
 
 	}
+
+	@Override
+	public void addResult(Results result) {
+		resultsRepository.save(result);
+
+	}
+
 	@Override
 	public Pacient editPacient(int id) {
 		return pacientRepository.editPacient(id);
 
 	}
-	
 
+	@Override
+	public Results addVisitResult(int id) {
+		return resultsRepository.getResults(id);
+
+	}
+
+	@Override
+	public void saveResult(int id, Results result) {
+		resultsRepository.save(result);
+		Results resultNew = resultsRepository.findById(result.getId());
+		Pacient pacient = pacientRepository.findById(id);
+		pacient.setResults(new HashSet<Results>(Arrays.asList(result)));
+		pacientRepository.save(pacient);
+
+	}
+
+	
+	@Override
+	public List<Pacient> findPacientsSuggestedDate() {
+		return (List<Pacient>) pacientRepository.findPacientsSuggestedDate();
+
+	}
+	
+	
 }

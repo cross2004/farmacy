@@ -27,14 +27,18 @@ Pacienti inregistrati:
         <td> Edit pacient </a></td>   </tr>
         
 <th:block th:each="Pacient : ${listAll}">
+ 		<tr><td th:text="${Pacient.id}"> ID </td> 
         <tr><td th:text="${Pacient.cnp}"> CNP </td> 
         <td th:text="${Pacient.firstName}"> First Name</td> 
         <td th:text="${Pacient.lastName}"> Last Name</td> 
         <td th:text="${Pacient.active}">Active</td> 
         <td th:text="${Pacient.details}">Details</td>
-        <td>  <a th:href="@{viewVisitResults(id=${Pacient.id})}">View visit results</a></td>  
         <td>  <a th:href="@{editPacient(id=${Pacient.id})}">Edit pacient</a></td>  
        
+        <td>  <a th:href="@{viewVisitResults(id=${Pacient.id})}">View visit results</a></td>  
+        <td>  <a th:href="@{addVisitResult(id=${Pacient.id})}">Add visit result</a></td>  
+        
+        
       </tr>
      </th:block>
 </table>

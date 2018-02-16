@@ -80,16 +80,7 @@ public class LoginController {
 	}
 
 	
-	@RequestMapping(value = "/helpdesk/helpDesk", method = RequestMethod.GET)
-	public ModelAndView helpDesk() {
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Bine ai venit " + user.getName() + " " + user.getLastName());
-		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("helpdesk/helpDesk");
-		return modelAndView;
-	}
+	
 	/*@RequestMapping(value = "/doctor/doctor", method = RequestMethod.POST)
 	public ModelAndView doctorsActions(@Valid Doctor doctor,
 			@RequestParam(value = "action", required = true) String action) {
