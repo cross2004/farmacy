@@ -3,6 +3,7 @@ package com.example.service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.EntityManager;
@@ -41,9 +42,18 @@ public class PacientServiceImpl implements PacientService {
 		pacient.setLastName(pacient.getLastName());
 		pacient.setDetails(pacient.getDetails());
 		pacient.setCnp(pacient.getCnp());
-
+		pacient.setActive(1);
+		pacient.setIdentityCard(pacient.getIdentityCard());
+		pacient.setState(pacient.getState());
+		pacient.setCity(pacient.getCity());
+		pacient.setAddress(pacient.getAddress());
+		pacient.setEmail(pacient.getEmail());
+		pacient.setPhone(pacient.getPhone());
+		pacient.setCas(pacient.getCas());
+		pacient.setCity(pacient.getCity());
+		pacient.setDetails(pacient.getDetails());
+		pacient.setBirthDate(pacient.getBirthDate());
 		pacientRepository.save(pacient);
-
 	}
 
 	@Override
@@ -54,14 +64,22 @@ public class PacientServiceImpl implements PacientService {
 
 	@Override
 	public void editPacient(Pacient pacient) {
+		pacient.setId(pacient.getId());
 		pacient.setFirstName(pacient.getFirstName());
 		pacient.setLastName(pacient.getLastName());
-		pacient.setCnp(pacient.getCnp());
-
 		pacient.setDetails(pacient.getDetails());
-		pacient.setLastDate(pacient.getLastDate());
-		pacient.setNextDate(pacient.getNextDate());
-		pacient.setActive(pacient.getActive());
+		pacient.setCnp(pacient.getCnp());
+		pacient.setActive(1);
+		pacient.setIdentityCard(pacient.getIdentityCard());
+		pacient.setState(pacient.getState());
+		pacient.setCity(pacient.getCity());
+		pacient.setAddress(pacient.getAddress());
+		pacient.setEmail(pacient.getEmail());
+		pacient.setPhone(pacient.getPhone());
+		pacient.setCas(pacient.getCas());
+		pacient.setCity(pacient.getCity());
+		pacient.setDetails(pacient.getDetails());
+		pacient.setBirthDate(pacient.getBirthDate());
 		pacientRepository.save(pacient);
 	}
 
@@ -78,13 +96,18 @@ public class PacientServiceImpl implements PacientService {
 	
 	@Override
 	public List<Pacient> findAll() {
-		return (List<Pacient>) em.createNamedQuery("findAll", Pacient.class).getResultList();
-
+		return  pacientRepository.findAll();
+		//return (List<Pacient>) em.createNamedQuery("findAll", Pacient.class).getResultList();
 	}
 
 	@Override
 	public Results viewVisitResults(int id) {
 		return pacientRepository.viewVisitResults(id);
+
+	}
+	@Override
+	public Pacient viewVisitResults2(int id) {
+		return pacientRepository.viewVisitResults2(id);
 
 	}
 
@@ -103,23 +126,21 @@ public class PacientServiceImpl implements PacientService {
 	@Override
 	public Results addVisitResult(int id) {
 		return resultsRepository.getResults(id);
-
 	}
 
 	@Override
 	public void saveResult(int id, Results result) {
 		resultsRepository.save(result);
-		Results resultNew = resultsRepository.findById(result.getId());
 		Pacient pacient = pacientRepository.findById(id);
-		pacient.setResults(new HashSet<Results>(Arrays.asList(result)));
+		//pacient.setResults(new HashSet<Results>(Arrays.asList(result)));
+		Set<Results> set = pacient.getResults();
+	    set.add(result);
 		pacientRepository.save(pacient);
-
 	}
-
 	
 	@Override
 	public List<Pacient> findPacientsSuggestedDate() {
-		return (List<Pacient>) pacientRepository.findPacientsSuggestedDate();
+		return  pacientRepository.findPacientsSuggestedDate();
 
 	}
 	

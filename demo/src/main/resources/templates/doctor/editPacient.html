@@ -15,7 +15,26 @@
  	
 </head>
 
-
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "/doctor/addNewPacient">Add new pacient</a></li>
+              <li class="active"><a href = "/doctor/viewPacients">viewPacients</a>/li>
+              <li class="active"><a href = "/doctor/viewSchedule">View schedule</a></li>
+             
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+  
 <div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -23,15 +42,25 @@
 					th:object="${editPacient}" method="post" class="form-horizontal"
 					role="form">
 					<h2>Edit pacient</h2>
-				<div class="form-group">
+					 <div class="form-group">
 						<div class="col-sm-9">
-					
-						<input type="text" th:field="*{id}" placeholder="${editPacient.id}"
+						<input type="hidden" th:field="*{id}" placeholder="${editPacient.id}"
 								class="form-control" /> 
 						</div>
 					</div>
-	            
-					<div class="form-group">
+				   <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{cnp}" placeholder="${editPacient.cnp}"
+								class="form-control" /> 
+						</div>
+					</div>
+	               <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{identityCard}" placeholder="${editPacient.identityCard}"
+								class="form-control" /> 
+						</div>
+					</div>
+	               	<div class="form-group">
 						<div class="col-sm-9">
 						<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
 								class="validation-message"></label>
@@ -47,24 +76,73 @@
 								class="form-control" /> 
 						</div>
 					</div>
-					 <div class="form-group">
+					   <div class="form-group">
 						<div class="col-sm-9">
-						<label th:if="${#fields.hasErrors('cnp')}" th:errors="*{cnp}"
-								class="validation-message"></label>
-						<input type="text" th:field="*{cnp}" placeholder="cnp"
+						<input type="text" th:field="*{state}" placeholder="state"
 								class="form-control" /> 
 						</div>
 					</div>
-				
+					   <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{city}" placeholder="city"
+								class="form-control" /> 
+						</div>
+					</div>
+					   <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{address}" placeholder="address"
+								class="form-control" /> 
+						</div>
+					</div>
+					   <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{birthDate}" placeholder="birthDate"
+								class="form-control" /> 
+						</div>
+					</div>
+					  <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{email}" placeholder="email"
+								class="form-control" /> 
+						</div>
+					</div>
+					  <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{phone}" placeholder="phone"
+								class="form-control" /> 
+						</div>
+					</div>
+					   <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{active}" placeholder="active"
+								class="form-control" /> 
+						</div>
+					</div>
+					   <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{cas}" placeholder="cas"
+								class="form-control" /> 
+						</div>
+					</div>
 					 <div class="form-group">
 						<div class="col-sm-9">
-						<label th:if="${#fields.hasErrors('details')}" th:errors="*{details}"
-								class="validation-message"></label>
 						<input type="text" th:field="*{details}" placeholder="details"
 								class="form-control" /> 
 						</div>
 					</div>
-				
+					 <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{suggestedDate}" placeholder="suggestedDate"
+								class="form-control" /> 
+						</div>
+					</div>
+					 <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{suggestedTreatment}" placeholder="suggestedTreatment"
+								class="form-control" /> 
+						</div>
+					</div>
+									
 					<div class="form-group">
 						<div class="col-sm-9">
 						

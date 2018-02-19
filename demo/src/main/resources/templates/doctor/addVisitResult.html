@@ -13,7 +13,25 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>	
- 	 </th:block>
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "/doctor/addNewPacient">Add new pacient</a></li>
+              <li class="active"><a href = "/doctor/viewPacients">viewPacients</a>/li>
+              <li class="active"><a href = "/doctor/viewSchedule">View schedule</a></li>
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+  
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -21,40 +39,49 @@
 					th:object="${addVisitResult}" method="post" class="form-horizontal"
 					role="form">
 					<h2>Registration Form</h2>
-					
-	
- 		<div class="form-group">
-							<div class="form-group">
+					  <div class="form-group">
 						<div class="col-sm-9">
-						<input type="text" th:field="${pacientTR.firstName}" placeholder="${pacientTR.firstName}"
+						<input type="hidden" th:field="${pacientTR.id}" placeholder="id"
+								class="form-control" /> 
+						</div></div>
+		        <div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="${pacientTR.cnp}" placeholder="${CNP}"
+								class="form-control" /> 
+						</div></div>
+						
+		       	<div class="form-group">
+					<div class="col-sm-9">
+				<input type="text" th:field="${pacientTR.firstName}" placeholder="${Prenume}"
 								class="form-control" /> 
 						</div>
+                     </div>
+                  
+					<div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="${pacientTR.lastName}" placeholder="${Nume}"
+								class="form-control" /> 
+						</div></div>
+ 					
+						<div class="form-group">
 							<div class="form-group">
 						<div class="col-sm-9">
-						<input type="text" th:field="${pacientTR.cnp}" placeholder="${pacientTR.cnp}"
+						<input type="text" th:field="*{dateVisit}" placeholder="Data vizitei YYYY-MM-DD"
 								class="form-control" /> 
-						</div>
-							<div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="${pacientTR.lastName}" placeholder="${pacientTR.lastName}"
-								class="form-control" /> 
-						</div>
- 							<div class="form-group">
-							<div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{descr}" placeholder="${descr}"
-								class="form-control" /> 
-						</div>
+						</div></div>
 						
 						<div class="form-group">
+							<div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{descr}" placeholder="Descriere"
+								class="form-control" /> 
+						</div></div>
+					<div class="form-group">
 						<div class="col-sm-9">
 							<button type="submit" class="btn btn-primary btn-block">addVisitResult</button>
 						</div>
 					</div>
-					
 					<span th:utext="${successMessage}"></span>
-					
-					
 				</form>
 			</div>
 		</div>

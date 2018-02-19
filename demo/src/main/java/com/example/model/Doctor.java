@@ -14,15 +14,19 @@ public class Doctor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "doctor_id")
 	private int id;
-	@Column(name = "name")
-	private String name;
+	@Column(name = "last_name")
+	private String lastname;
+	@Column(name = "first_name")
+	private String firstname;
 	@Column(name = "degree")
 	private String degree;
 	@Column(name = "description")
 	private String description;
-
 	@Column(name = "active")
 	private int activeDoc;
+	@Column(name = "parafa")
+	private int parafa;
+	
 
 	public int getId() {
 		return id;
@@ -31,15 +35,29 @@ public class Doctor {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+	
+	public int getParafa() {
+		return parafa;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setParafa(int parafa) {
+		this.parafa = parafa;
 	}
 
+	public String getLastName() {
+		return lastname;
+	}
+
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
+	}
+	public String getFirstName() {
+		return firstname;
+	}
+
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
+	}
 	public int getActive() {
 		return activeDoc;
 	}

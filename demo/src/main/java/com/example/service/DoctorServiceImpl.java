@@ -11,7 +11,8 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public void addDoctor(Doctor doctor) {
-		doctor.setName(doctor.getName());
+		doctor.setFirstName(doctor.getFirstName());
+		doctor.setLastName(doctor.getLastName());
 		doctor.setDescription(doctor.getDescription());
 		doctor.setDegree(doctor.getDegree());
 		doctor.setActive(doctor.getActive());
@@ -26,7 +27,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	public void editDoctor(Doctor doctor) {
-		doctor.setName(doctor.getName());
+		doctor.setFirstName(doctor.getFirstName());
 		doctor.setDescription(doctor.getDescription());
 		doctor.setDegree(doctor.getDegree());
 		doctor.setActive(doctor.getActive());

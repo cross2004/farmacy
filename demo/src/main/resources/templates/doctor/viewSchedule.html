@@ -6,10 +6,78 @@
 	<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	
+<head>
+	<title>Spring Security Tutorial</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	
+</head>
+	<body>
+	 <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "/doctor/addNewPacient">Add new pacient</a></li>
+             <li class="active"><a href = "/doctor/viewPacients">View Pacients</a></li>
+              <li class="active"><a href = "/doctor/viewSchedule">View schedule</a></li>
+              
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
 	
-<body>
-
-hello world
-  
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for doctor" title="Type in a name">
+<table border =1 id="myTable">
+  <tr>  <td >Doctor</td> 
+        <td >Pacient</td>
+        <td >Details</td>
+        <td >Data</td>
+        <td >Start Time</td> 
+        <td >End Time</td> 
+   </tr>
+<th:block th:each="Schedule : ${schAll}">
+        <td th:text="${Schedule.doctorId}"> Doctor</td> 
+         <td th:text="${Schedule.pacientId}"> Doctor2</td> 
+  <td>
+   <th:block th:each="Pacient : ${allPacients}">
+       <h2 th:if="${Pacient.id == Schedule.pacientId}" >
+          <div th:text="${Pacient.firstName}"></div>
+       </h2>
+    </th:block></td>
+   
+   <td th:text="${Schedule.details}">details</td> 
+      </tr>
+     </th:block>
+</table>
+ 
+  						
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 </body>
 </html>

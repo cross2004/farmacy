@@ -1,3 +1,6 @@
+Monday, February 19, 2018
+9:08 PM
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
@@ -16,31 +19,75 @@
  	
 </head>
 <body>
-Pacienti inregistrati:
-
+ <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "/doctor/addNewPacient">Add new pacient</a></li>
+             <li class="active"><a href = "/doctor/viewPacients">View Pacients</a>/li>
+              <li class="active"><a href = "/doctor/viewSchedule">View schedule</a></li>
+              
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   
+  <img th:src="@{/images/smile.jpg}" class="img-responsive center-block" width="600" height="600" alt="family" />
+    <br>
+   <br>
+  
+   
 <table border =1>
   <tr><td >CNP</td> 
+  <td >identityCard</td> 
         <td >First Name</td> 
         <td >Last Name</td> 
+        <td >State</td> 
+        <td >City</td> 
+        <td >Address</td> 
+        <td >BirthDate</td> 
+        <td >Email</td>
+        <td >Phone</td>  
+        <td >Cas</td> 
         <td >Active</td> 
         <td >Details</td>
-        <td> Edit pacient </a></td>   </tr>
+        <td >Suggested Date</td>
+        <td >Suggested Treatment</td>
+         
+    </tr>
         
-<th:block th:each="Pacient : ${listAll}">
- 		<tr><td th:text="${Pacient.id}"> ID </td> 
-        <tr><td th:text="${Pacient.cnp}"> CNP </td> 
+      <th:block th:each="Pacient : ${listAll}">
+ 		<tr>
+ 		<td th:text="${Pacient.cnp}"> ID </td> 
+        <td th:text="${Pacient.identityCard}"> CNP </td> 
         <td th:text="${Pacient.firstName}"> First Name</td> 
         <td th:text="${Pacient.lastName}"> Last Name</td> 
-        <td th:text="${Pacient.active}">Active</td> 
-        <td th:text="${Pacient.details}">Details</td>
-        <td>  <a th:href="@{editPacient(id=${Pacient.id})}">Edit pacient</a></td>  
+        <td th:text="${Pacient.state}">State</td> 
+        <td th:text="${Pacient.city}"> City</td> 
+        <td th:text="${Pacient.address}"> Address</td> 
+        <td th:text="${Pacient.birthDate}"> BirthDate</td> 
+         <td th:text="${Pacient.email}"> Email </td> 
+        <td th:text="${Pacient.phone}"> Phone </td> 
        
-        <td>  <a th:href="@{viewVisitResults(id=${Pacient.id})}">View visit results</a></td>  
-        <td>  <a th:href="@{addVisitResult(id=${Pacient.id})}">Add visit result</a></td>  
+        <td th:text="${Pacient.cas}"> Cas </td> 
+        <td th:text="${Pacient.active}"> Active</td> 
+        <td th:text="${Pacient.details}"> Details </td> 
+       
+        <td th:text="${Pacient.suggestedDate}"> Suggested date </td> 
+        <td th:text="${Pacient.suggestedTreatment}"> Suggested Treatment </td> 
+        <td><a th:href="@{editPacient(id=${Pacient.id})}">Edit pacient</a></td>  
+        <td><a th:href="@{viewVisitResults(id=${Pacient.id})}">View visit results</a></td>  
+        <td><a th:href="@{addVisitResult(id=${Pacient.id})}">Add visit result</a></td>  
         
-        
-      </tr>
-     </th:block>
-</table>
-</body>
-</html>
+         </tr> </th:block>
+         </table>
+       
+  
+     

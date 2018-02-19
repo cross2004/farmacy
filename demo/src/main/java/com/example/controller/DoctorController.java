@@ -6,15 +6,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.model.User;
 import com.example.model.Pacient;
 import com.example.model.Results;
-import com.example.model.Schedule;
 import com.example.service.UserService;
 import com.example.service.PacientService;
 import com.example.service.ScheduleService;
@@ -25,8 +22,6 @@ public class DoctorController {
 	private UserService userService;
 	@Autowired
 	private PacientService pacientService;
-	@Autowired
-	private PacientService resultsService;
 	@Autowired
 	private ScheduleService scheduleService;
 	
@@ -41,27 +36,14 @@ public class DoctorController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/doctor/doctor2", method = RequestMethod.GET)
-	public ModelAndView doctor2() {
-		ModelAndView modelAndView = new ModelAndView();
-	//	modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("doctor/doctor2");
-		return modelAndView;
-	}
-	
-	
 
 	@RequestMapping(value = "/doctor/viewPacients", method = RequestMethod.GET)
 	public ModelAndView viewPacients() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("listAll", pacientService.findAll());
 		modelAndView.setViewName("doctor/viewPacients");
-
 		return modelAndView;
 	}
-
-	
-
 	@RequestMapping(value = "/doctor/addNewPacient", method = RequestMethod.GET)
 	public ModelAndView addNewPacient() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -88,9 +70,8 @@ public class DoctorController {
 
 			pacientService.savePacient(pacient);
 			modelAndView.addObject("successMessage", "Pacient has been registered successfully");
-			modelAndView.setViewName("doctor/addNewPacient");
+			modelAndView.setViewName("doctor/viewPacients");
 		}
-
 		return modelAndView;
 	}
 
@@ -99,8 +80,14 @@ public class DoctorController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("editPacient", pacientService.editPacient(id));
 		modelAndView.setViewName("doctor/editPacient");
-
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
+	public String editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
+		//pacient.setId(pacient.getId());	
+		pacientService.savePacient(pacient);
+		return "redirect:viewPacients";
 	}
 
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.GET)
@@ -114,17 +101,25 @@ public class DoctorController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
-	public String editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
-		pacientService.savePacient(pacient);
-		return "redirect:viewPacients";
-	}
-
+	
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.POST)
 	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult,@Valid Results result) {
-		ModelAndView modelAndView = new ModelAndView();
-		int id = pacient.getId();
-		pacientService.saveResult(id, result);		
+		pacientService.saveResult(pacient.getId(), result);		
 		return "redirect:viewPacients";
+	}
+	@RequestMapping(value = "/doctor/viewVisitResults", method = RequestMethod.GET)
+	public ModelAndView viewScheduleAll(int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("viewVisitResults",pacientService.viewVisitResults2(id));
+		modelAndView.setViewName("doctor/viewVisitResults");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/doctor/viewSchedule", method = RequestMethod.GET)
+	public ModelAndView viewSchedule() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("schAll", scheduleService.findAll());
+		modelAndView.addObject("allPacients",pacientService.findAll());
+		modelAndView.setViewName("doctor/viewSchedule");
+		return modelAndView;
 	}
 }

@@ -11,27 +11,23 @@
 </head>
 
 <body>
- <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="registration">Register</a>
+            <a class="navbar-brand" href="login.html">LOGIN</a>
           </div>
-         
-     </div> 
-   </div>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   
-<img th:src="@{/images/familyy.jpg}" class="img-responsive center-block" width="600" height="600" alt="family" />
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+          </div>
+        </div>
+     
       
 	<div class="container">
 	 	<form th:action="@{/login}" method="POST" class="form-signin">
 		<center>	<h3 class="form-signin-heading"y th:text="Cabinet+' '+Stomatologic+' '+Alexandra+' '+Tarchila"></h3></center>	<br/>
-		
-	<input type="text" id="email" name="email"  th:placeholder="Email"
+			<input type="text" id="email" name="email"  th:placeholder="Email"
 				class="form-control" /> <br/> 
 			<input type="password"  th:placeholder="Password"
 				id="password" name="password" class="form-control" /> <br /> 

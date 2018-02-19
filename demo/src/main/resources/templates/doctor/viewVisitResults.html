@@ -12,18 +12,56 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 	
-</head>
 	
-<table border =1>
-  <tr><td >CNP</td> 
-        <td >First Name</td> 
-        <td >Last Name</td> 
-        <td >Active</td> 
-        <td >Details</td>
-          </tr>    
-        <tr><td th:text="${viewVisitResults.id}"> ID </td> 
-        <td th:text="${viewVisitResults.description}">Details</td></tr>
-          
-</table>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "/doctor/addNewPacient">Add new pacient</a></li>
+              <li class="active"><a href = "/doctor/viewPacients">viewPacients</a>/li>
+              <li class="active"><a href = "/doctor/viewSchedule">View schedule</a></li>
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+    <img th:src="@{/images/smile.jpg}" class="img-responsive center-block" width="600" height="600" alt="family" />
+  <br>
+   
+   
+<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+<table border=1>
+     <th:block th:each="Pacient : ${viewVisitResults}">  
+    <tr>CNP<td th:text="${Pacient.cnp}"> CNP </td> 
+     FIRST NAME <td th:text="${Pacient.firstName}"> First Name</td> 
+     LAST NAME <td th:text="${Pacient.lastName}"> Last Name</td> </tr>
+     </th>
+ </tr>
+    </table>  
+    
+ <br>
+   <table border =1>
+   <th:block th:each="Pacient : ${viewVisitResults}">  
+    <th:block th:each="Result : ${Pacient.results}"> 
+     <tr><td th:text="${Result.dateVisit}"> dateVisit</td>
+     <td th:text="${Result.descr}"> Result</td> </tr>
+     </th>
+      </th>
+      </table>  
+      
+</div>
+</div>
+</div></table>
 
+</body>
+</html>

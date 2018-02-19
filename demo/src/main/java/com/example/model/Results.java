@@ -9,6 +9,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @Entity
@@ -22,8 +24,10 @@ public class Results {
 	@Column(name = "descr")
     private String descr;
 	
-	@Column(name = "date")
-	private Date date;
+	@DateTimeFormat (pattern="yyyy-mm-dd")
+	@Column(name = "dateVisit")
+	private Date dateVisit;
+	
 	
 	public int getId() {
 		return id;
@@ -38,6 +42,13 @@ public class Results {
 
 	public void setDescr(String descr) {
 		this.descr = descr;
+	}
+	public Date getDateVisit() {
+		return dateVisit;
+	}
+
+	public void setDateVisit(Date dateVisit) {
+		this.dateVisit = dateVisit;
 	}
 }
 
