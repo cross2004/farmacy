@@ -12,8 +12,10 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>  <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+
+<body> 
+ <div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="logout.html">Logout</a>
           </div>
@@ -28,9 +30,7 @@
    </div>
    <br>
    <br>
-   <br>
-   <br>
-   <img th:src="@{/images/familyy.jpg}" class="img-responsive center-block" width="600" height="600" alt="family" />
+  <img th:src="@{/images/doctor.jpg}" class="img-responsive center-block"/>
    <div class="container">
     <div layout:fragment="content">
         <!-- ============================================================================ -->
@@ -43,5 +43,11 @@
          Short presentation of the team and resources
         </p>
       </div></div>
+      
+       <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+          <div class="navbar-header">
+    </div></div></div>
+    
     </body>
 </html>

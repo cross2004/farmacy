@@ -7,37 +7,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for doctor" title="Type in a name">
-<table border =1 id="myTable">
-  <tr>  <td >Doctor</td> 
-        <td >Pacient</td>
-        <td >Details</td>
-        <td >Data</td>
-        <td >Start Time</td> 
-        <td >End Time</td> 
-   </tr>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+          <li class="active"><a href = "/helpdesk/addAppointment">Add appointment</a></li>
+              <li class="active"><a href = "/helpdesk/viewScheduleAll">View Schedule</a></li>
+              <li class="active"><a href = "/helpdesk/viewMaterials">View materials</a></li>
+              <li class="active"><a href = "/helpdesk/addMaterials">Add material</a></li>
+              <li class="active"><a href = "/helpdesk/helpDesk">Help Desk</a></li>
+               </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br> 
+    <img th:src="@{/images/team.jpg}" class="img-responsive center-block"   />
+    <br>      
+   <div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+			
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for pacient" title="Type in a name">
+<input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Search for start time" title="Type in an hour">
+
+<div>
+<table class="box-table-a" id= "myTable">
+<tr>
+  <th scope="col">Doctor</th>
+  <th scope="col">Pacient name</th>
+  <th scope="col">Details</th>
+ 
+  <th scope="col">Start Time</th>
+  <th scope="col">End Time</th>
+ </tr>
+
+
 <th:block th:each="Schedule : ${schAll}">
-        <td th:text="${Schedule.doctorId}"> Doctor</td> 
-         <td th:text="${Schedule.pacientId}"> Doctor2</td> 
-  <td>
-   <th:block th:each="Pacient : ${allPacients}">
-       <h2 th:if="${Pacient.id == Schedule.pacientId}" >
-          <div th:text="${Pacient.firstName}"></div>
-       </h2>
-    </th:block></td>
-   
+<tr>
+   <td th:text="${Schedule.doctorId}"> Doctor</td> 
+   <td>   <th:block th:each="Pacient : ${allPacients}">
+     <h2 th:if="${Pacient.id == Schedule.pacientId}" >
+      <div th:text="${Pacient.firstName}+' '+${Pacient.lastName}"></div>
+     </h2>
+   </th:block>
+   </td>
    <td th:text="${Schedule.details}">details</td> 
-      </tr>
-     </th:block>
+   <td th:text="${Schedule.startTime}">details</td> 
+   <td th:text="${Schedule.endTime}">details</td> 
+  </tr>
+   </th:block>
+  
+
 </table>
-  <a th:href="@{addAppointment}">addAppointment</a>
-  						
+ </div>
+  		</div>			
+  		</div>
+  		</div>	
+  		
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i;
@@ -46,7 +84,7 @@ function myFunction() {
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
@@ -57,6 +95,33 @@ function myFunction() {
   }
 }
 </script>
+<script>
+function myFunction1() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput1");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+<br><br><br><br>
+
+<div class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">Copyright 2018  Alexandra Tarchila
+   </div>
+   </div>
+ </div>
+    
 </body>
 </html>
-

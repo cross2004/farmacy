@@ -7,18 +7,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 	<title>Registration Form</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>	
-<body>	
-<form th:action="@{/}" method="get">
-	button class="btn btn-md btn-warning btn-block" type="Submit">Go To Doctor's Main Page</button>
-	</form>	
-	
-	<div class="container">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+     <li class="active"><a href = "/helpdesk/addAppointment">Add appointment</a></li>
+              <li class="active"><a href = "/helpdesk/viewScheduleAll">View Schedule</a></li>
+              <li class="active"><a href = "/helpdesk/viewMaterials">View materials</a></li>
+              <li class="active"><a href = "/helpdesk/addMaterials">Add material</a></li>
+              <li class="active"><a href = "/helpdesk/helpDesk">Help Desk</a></li>
+                   </ul>
+          </div>
+     </div> 
+   </div>
+    <br> 
+    <img th:src="@{/images/team.jpg}" class="img-responsive center-block"   />
+    <br>      
+ 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<form autocomplete="off" action="#" th:action="@{/helpdesk/addMaterials}"
@@ -39,16 +54,17 @@
 							<button type="submit" class="btn btn-primary btn-block">Add material</button>
 						</div>
 					</div>
-					
 					<span th:utext="${successMessage}"></span>
-					
-					
 				</form>
 			</div>
 		</div>
 	</div>
 	
-
-</body>
+<div class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">Copyright 2018  Alexandra Tarchila
+   </div>
+   </div>
+ </div>
 </body>
 </html>

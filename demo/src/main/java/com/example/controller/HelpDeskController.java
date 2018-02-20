@@ -97,6 +97,11 @@ public class HelpDeskController {
 		modelAndView.setViewName("helpdesk/addMaterials");
 		return modelAndView;
 	}
+	@RequestMapping(value = "/helpdesk/addMaterials", method = RequestMethod.POST)
+	public String addMaterial(@Valid Material material, BindingResult bindingResult) {
+		materialsService.saveMaterial(material);
+		return "redirect:viewMaterials";
+	}
 	
 	@RequestMapping(value = "/helpdesk/editMaterials", method = RequestMethod.GET)
 	public ModelAndView editMaterial(int id) {
@@ -107,7 +112,7 @@ public class HelpDeskController {
 		return modelAndView;
 	}
 	@RequestMapping(value = "/helpdesk/editMaterials", method = RequestMethod.POST)
-	public String editPacient(@Valid Material material, BindingResult bindingResult) {
+	public String editMaterial(@Valid Material material, BindingResult bindingResult) {
 		materialsService.saveMaterial(material);
 		return "redirect:viewMaterials";
 	}

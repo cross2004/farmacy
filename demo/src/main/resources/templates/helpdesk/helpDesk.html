@@ -8,7 +8,7 @@
 
 	
 <head>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />  
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,32 +16,80 @@
 </head>
 <body>
 
-<a href = "/helpdesk/addAppointment">addAppointment</a>
-<a href = "/helpdesk/viewScheduleAll">view Schedule</a>
-<a href = "/helpdesk/viewMaterials">view materials</a>
-<a href = "/helpdesk/addMaterials">addmaterials</a>
+ <div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+           <li class="active"><a href = "/helpdesk/addAppointment">Add appointment</a></li>
+              <li class="active"><a href = "/helpdesk/viewScheduleAll">View Schedule</a></li>
+              <li class="active"><a href = "/helpdesk/viewMaterials">View materials</a></li>
+              <li class="active"><a href = "/helpdesk/addMaterials">Add material</a></li>
+              <li class="active"><a href = "/helpdesk/helpDesk">Help Desk</a></li>
+            
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+  <img th:src="@{/images/doctor.jpg}" class="img-responsive center-block"/>
+   <div class="container">
+    <div layout:fragment="content">
+        <!-- ============================================================================ -->
+        <!-- This content is only used for static prototyping purposes (natural templates)-->
+        <!-- and is therefore entirely optional, as this markup fragment will be included -->
+        <!-- from "fragments/header.html" at runtime.                                     -->
+        <!-- ============================================================================ -->
+        <h1>Welcome to the "AT Medical Dentistry!" ...</h1>
+        <p>
+        <div th:text="${execInfo.now.time}"></div>
+         These pacients shoul be scheduled:
+        </p>
+      </div></div>
+          
+<div>
 
 
-<table border =1>
-  <tr><td >CNP</td> 
-        <td >First Name</td> 
-        <td >Last Name</td> 
-        <td >Active</td> 
-        <td >Details</td>
-        <td> Edit pacient </a></td>   </tr>
-        
+<table class="box-table-a" >
+  <tr>
+  <th scope="col">CNP</th>
+  <th scope="col">First Name</th>
+  <th scope="col">Last Name</th>
+  <th scope="col">Active</th>
+  <th scope="col">State</th>
+  <th scope="col">City</th>
+  <th scope="col">Address</th>
+  <th scope="col">BirthDate</th>
+  <th scope="col">Email</th>   
+  <th scope="col">Phone</th>   
+ </tr>
+
 <th:block th:each="Pacient : ${findPacientsSuggestedDate}">
- 		<tr><td th:text="${Pacient.id}"> ID </td> 
-        <tr><td th:text="${Pacient.cnp}"> CNP </td> 
+ 		<tr><td th:text="${Pacient.cnp}"> CNP </td> 
         <td th:text="${Pacient.firstName}"> First Name</td> 
         <td th:text="${Pacient.lastName}"> Last Name</td> 
         <td th:text="${Pacient.active}">Active</td> 
-        <td th:text="${Pacient.details}">Details</td>
+        <td th:text="${Pacient.state}">State</td>
+        <td th:text="${Pacient.city}">City</td>
+        <td th:text="${Pacient.address}">Address</td>
+        <td th:text="${Pacient.birthDate}">BirthDate</td>
+        <td th:text="${Pacient.email}">email</td>
+        
+        <td th:text="${Pacient.phone}">Phone</td>
+        
+        
        </tr>
      </th:block>
 </table>
+<br><br><br><br><br>
 
-
-
+ <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+          <div class="navbar-header">
+    </div></div></div>
+ 
 </body>
 </html>

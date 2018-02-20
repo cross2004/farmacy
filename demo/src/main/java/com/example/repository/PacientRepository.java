@@ -22,7 +22,7 @@ public interface PacientRepository  extends JpaRepository<Pacient, Long> {
 	Pacient viewVisitResults2(@Param("id") int id);
 	@Query("SELECT p FROM Pacient p where p.id= :id")
 	Pacient editPacient(@Param("id") int id);
-	@Query("SELECT p FROM Pacient p where suggestedDate < CURDATE()+30 ")
+	@Query("SELECT p FROM Pacient p where p.suggestedDate > CURDATE() and p.suggestedDate < CURDATE()+30 ")
 	List<Pacient> findPacientsSuggestedDate();
 	
 	

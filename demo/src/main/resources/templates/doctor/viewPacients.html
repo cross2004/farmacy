@@ -12,14 +12,15 @@ Monday, February 19, 2018
 	
 <head>
 	<title>Spring Security Tutorial</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />   
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  	
 </head>
 <body>
- <div class="navbar navbar-inverse navbar-fixed-top">
+ 
+    <div class="navbar navbar-inverse navbar-fixed-top ">
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="logout.html">Logout</a>
@@ -34,35 +35,28 @@ Monday, February 19, 2018
           </div>
      </div> 
    </div>
-   <br>
-   <br>
-   <br>
-   <br>
-   
-  <img th:src="@{/images/smile.jpg}" class="img-responsive center-block" width="600" height="600" alt="family" />
-    <br>
-   <br>
-  
-   
-<table border =1>
-  <tr><td >CNP</td> 
-  <td >identityCard</td> 
-        <td >First Name</td> 
-        <td >Last Name</td> 
-        <td >State</td> 
-        <td >City</td> 
-        <td >Address</td> 
-        <td >BirthDate</td> 
-        <td >Email</td>
-        <td >Phone</td>  
-        <td >Cas</td> 
-        <td >Active</td> 
-        <td >Details</td>
-        <td >Suggested Date</td>
-        <td >Suggested Treatment</td>
-         
-    </tr>
-        
+   <br> <br> <br> <br> <br>
+ <img th:src="@{/images/kid.jpg}" class="img-responsive center-block"  />
+ 
+<div>
+<table class="box-table-b" >
+  <tr>
+  <th scope="col">CNP</th>
+  <th scope="col">Identity Card</th>
+  <th scope="col">First Name</th>
+  <th scope="col">Last Name</th>
+  <th scope="col">State</th>
+  <th scope="col">City</th>
+  <th scope="col">Address</th>
+  <th scope="col">BirthDate</th>
+  <th scope="col">Email</th>   
+  <th scope="col">Phone</th>   
+  <th scope="col">Cas</th>             
+  <th scope="col">Active</th>       
+  <th scope="col">Details</th>            
+  <th scope="col">Suggested Date</th>   
+  <th scope="col">Suggested Treatment</th> 
+  </tr>   
       <th:block th:each="Pacient : ${listAll}">
  		<tr>
  		<td th:text="${Pacient.cnp}"> ID </td> 
@@ -82,12 +76,22 @@ Monday, February 19, 2018
        
         <td th:text="${Pacient.suggestedDate}"> Suggested date </td> 
         <td th:text="${Pacient.suggestedTreatment}"> Suggested Treatment </td> 
-        <td><a th:href="@{editPacient(id=${Pacient.id})}">Edit pacient</a></td>  
-        <td><a th:href="@{viewVisitResults(id=${Pacient.id})}">View visit results</a></td>  
-        <td><a th:href="@{addVisitResult(id=${Pacient.id})}">Add visit result</a></td>  
+        <td><a th:href="@{editPacient(id=${Pacient.id})}">Edit pacient | </a>  
+        <a th:href="@{viewVisitResults(id=${Pacient.id})}">View visit results | </a>  
+        <a th:href="@{addVisitResult(id=${Pacient.id})}">Add visit result</a></td>  
         
          </tr> </th:block>
          </table>
-       
+   </div>  
+ <br> <br> <br> <br> <br>
+      
+         
+   <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+          <div class="navbar-header">
+    </div></div></div>
+    <br> <br> <br> <br> <br>
+</body>
+       </html>
   
      

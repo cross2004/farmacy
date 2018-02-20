@@ -13,10 +13,26 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>	
-<form th:action="@{/}" method="get">
-	button class="btn btn-md btn-warning btn-block" type="Submit">Go To Doctor's Main Page</button>
-	</form>	
-	
+<div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "/helpdesk/addAppointment">Add appointment</a></li>
+              <li class="active"><a href = "/helpdesk/viewScheduleAll">View Schedule</a></li>
+              <li class="active"><a href = "/helpdesk/viewMaterials">View materials</a></li>
+              <li class="active"><a href = "/helpdesk/addMaterials">Add material</a></li>
+              <li class="active"><a href = "/helpdesk/helpDesk">Help Desk</a></li>
+                   
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -28,26 +44,29 @@
 						<div class="col-sm-9">
 						<input type="text" th:field="*{doctorId}" placeholder="doctor_id"
 								class="form-control" /> 
-						</div>
+						</div></div>
 						
+							<div class="form-group">
 						<div class="col-sm-9">
 						<input type="text" th:field="*{pacientId}" placeholder="pacient_id"
 								class="form-control" /> 
-						</div>
+						</div></div>
+							<div class="form-group">
 						<div class="col-sm-9">
 						<input type="text" th:field="*{details}" placeholder="details"
 								class="form-control" /> 
-						</div>
+						</div></div>
 					
-						
+							<div class="form-group">
 					<div class="col-sm-9">
 						<input type="text" th:field="*{startTime}" placeholder="startTime"
 								class="form-control" /> 
-						</div>
+						</div></div>
+							<div class="form-group">
 		  			 <div class="col-sm-9">
 						<input type="text" th:field="*{endTime}" placeholder="endTime"
 								class="form-control" /> 
-						</div>
+						</div></div>
 		
 					<div class="form-group">
 						<div class="col-sm-9">
@@ -63,7 +82,14 @@
 		</div>
 	</div>
 	
-	 <div th:text="${execInfo.now.time}"></div>
+	
+	 
+	 <br><br><br>
+ <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+          <div class="navbar-header">
+    </div></div></div>
+	 
 	 
 </body>
 </html>
