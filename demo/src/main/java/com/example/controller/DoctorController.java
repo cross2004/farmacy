@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.model.User;
+import com.example.model.Doctor;
 import com.example.model.Pacient;
 import com.example.model.Results;
 import com.example.service.UserService;
+import com.example.service.DoctorService;
 import com.example.service.PacientService;
 import com.example.service.ScheduleService;
 
@@ -24,7 +26,9 @@ public class DoctorController {
 	private PacientService pacientService;
 	@Autowired
 	private ScheduleService scheduleService;
-	
+	@Autowired
+	private DoctorService doctorService;
+
 	@RequestMapping(value = "/doctor/doctor", method = RequestMethod.GET)
 	public ModelAndView doctor() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -35,7 +39,6 @@ public class DoctorController {
 		modelAndView.setViewName("doctor/doctor");
 		return modelAndView;
 	}
-	
 
 	@RequestMapping(value = "/doctor/viewPacients", method = RequestMethod.GET)
 	public ModelAndView viewPacients() {
@@ -44,6 +47,7 @@ public class DoctorController {
 		modelAndView.setViewName("doctor/viewPacients");
 		return modelAndView;
 	}
+
 	@RequestMapping(value = "/doctor/addNewPacient", method = RequestMethod.GET)
 	public ModelAndView addNewPacient() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -85,7 +89,7 @@ public class DoctorController {
 
 	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
 	public String editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
-		//pacient.setId(pacient.getId());	
+		// pacient.setId(pacient.getId());
 		pacientService.savePacient(pacient);
 		return "redirect:viewPacients";
 	}
@@ -101,24 +105,34 @@ public class DoctorController {
 		return modelAndView;
 	}
 
-	
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.POST)
-	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult,@Valid Results result) {
-		pacientService.saveResult(pacient.getId(), result);		
+	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult, @Valid Results result) {
+		Doctor doctorNew = new Doctor();
+		/*if (bindingResult.getFieldValue("xxx").equals("Tarchila")) {
+			 doctorNew = doctorService.findById(1);
+		} else {
+			 doctorNew = doctorService.findById(2);
+		}*/
+		doctorNew = doctorService.findById(1);
+		result.setDoctorRes(doctorNew);
+
+		pacientService.saveResult(pacient.getId(), result);
 		return "redirect:viewPacients";
 	}
+
 	@RequestMapping(value = "/doctor/viewVisitResults", method = RequestMethod.GET)
 	public ModelAndView viewScheduleAll(int id) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("viewVisitResults",pacientService.viewVisitResults2(id));
+		modelAndView.addObject("viewVisitResults", pacientService.viewVisitResults2(id));
 		modelAndView.setViewName("doctor/viewVisitResults");
 		return modelAndView;
 	}
+
 	@RequestMapping(value = "/doctor/viewSchedule", method = RequestMethod.GET)
 	public ModelAndView viewSchedule() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("schAll", scheduleService.findAll());
-		modelAndView.addObject("allPacients",pacientService.findAll());
+		modelAndView.addObject("allPacients", pacientService.findAll());
 		modelAndView.setViewName("doctor/viewSchedule");
 		return modelAndView;
 	}

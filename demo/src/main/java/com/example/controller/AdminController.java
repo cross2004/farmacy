@@ -18,13 +18,63 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.User;
 import com.example.model.Role;
 import com.example.model.Doctor;
-
+import com.example.model.Pacient;
+import com.example.service.DoctorService;
+import com.example.service.PacientService;
 import com.example.service.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AdminController {
+	
 	@Autowired
-	private UserService userService;
+	private DoctorService doctorService;
+
+	@RequestMapping(value = "/admin/viewUsers", method = RequestMethod.GET)
+	public ModelAndView viewUsers() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("listAllDoctors", doctorService.findAllDoctors());
+		modelAndView.setViewName("admin/viewUsers");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/admin/editUser", method = RequestMethod.GET)
+	public ModelAndView editUser(int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("editUser", doctorService.findById(id));
+		modelAndView.setViewName("admin/editUser");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/admin/editUser", method = RequestMethod.POST)
+	public String editUser(@Valid Doctor doctor, BindingResult bindingResult) {
+		doctorService.editDoctor(doctor);
+		return "redirect:viewUsers";
+	}
+	
+	@RequestMapping(value = "/admin/addUser", method = RequestMethod.GET)
+	public ModelAndView addUser() {
+		ModelAndView modelAndView = new ModelAndView();
+		Doctor doctor = new Doctor();
+		modelAndView.addObject("addDoctor", doctor);
+		modelAndView.setViewName("admin/addUser");
+		return modelAndView;
+
+	}
+	@RequestMapping(value = "/admin/addUser", method = RequestMethod.POST)
+	public ModelAndView addUser(@Valid Doctor doctor, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		Doctor doctorExists = doctorService.findByCnp(doctor.getCnp());
+		if (doctorExists != null) 
+			modelAndView.setViewName("admin/addUser");
+		else {
+			doctorService.addDoctor(doctor);
+			modelAndView.setViewName("admin/viewUsers");
+		}
+		return modelAndView;
+	}
+
+
 }

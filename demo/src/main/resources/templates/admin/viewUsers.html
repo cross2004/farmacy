@@ -1,0 +1,85 @@
+Monday, February 19, 2018
+9:08 PM
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<title> Alexandra Tarchila
+	</title>
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	
+<head>
+	<title>Spring Security Tutorial</title>
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />   
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	
+</head>
+<body>
+ 
+    <div class="navbar navbar-inverse navbar-fixed-top ">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "../registration">Add new application user</a></li>
+              <li class="active"><a href = "addUser">Add new doctor</a></li>
+              <li class="active"><a href = "viewUsers">View doctors</a></li>
+                  </ul>
+          </div>
+     </div> 
+   </div>
+   <br> <br> <br> <br> <br>
+ <img th:src="@{/images/kid.jpg}" class="img-responsive center-block"  />
+ 
+<div>
+<table class="box-table-b" >
+  <tr>
+   <th scope="col">ID</th>
+  <th scope="col">CNP</th>
+  <th scope="col">First Name</th>
+  <th scope="col">Last Name</th>
+  <th scope="col">Degree</th>
+  <th scope="col">Description</th>
+  <th scope="col">Email</th>
+ 
+  <th scope="col">Phone</th>   
+  <th scope="col">Parafa</th>             
+  <th scope="col">Active</th>       
+  </tr>   
+      <th:block th:each="Doctor : ${listAllDoctors}">
+ 		<tr>
+ 		<td th:text="${Doctor.id}"> ID </td> 
+        <td th:text="${Doctor.cnp}"> CNP </td> 
+        <td th:text="${Doctor.firstName}"> First Name</td> 
+        <td th:text="${Doctor.lastName}"> Last Name</td> 
+        <td th:text="${Doctor.degree}">degree</td> 
+        <td th:text="${Doctor.description}"> Description</td> 
+        <td th:text="${Doctor.email}"> email</td> 
+        <td th:text="${Doctor.phone}"> phone</td> 
+       
+        <td th:text="${Doctor.parafa}"> Parafa </td> 
+      
+        <td th:text="${Doctor.active}"> Active </td> 
+        
+        <td><a th:href="@{editUser(id=${Doctor.id})}">Edit doctor</a>  
+         </tr> </th:block>
+         </table>
+   </div>  
+ <br> <br> <br> <br> <br>
+      
+         
+   <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+          <div class="navbar-header">
+    </div></div></div>
+    <br> <br> <br> <br> <br>
+</body>
+       </html>
+  
+     

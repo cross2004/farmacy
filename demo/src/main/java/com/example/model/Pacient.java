@@ -81,6 +81,7 @@ public class Pacient {
 	@Column(name = "lastDate")
 	private Date lastDate;
 
+	@DateTimeFormat (pattern="yyyy-mm-dd")
 	@Column(name = "suggestedDate")
 	private Date suggestedDate;
 

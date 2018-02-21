@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<title> Alexandra Tarchila
+	</title>
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<title>Registration Form</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>	
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="logout.html">Logout</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "../registration">Add new user</a></li>
+              <li class="active"><a href = "addDoctor">Add new doctor</a></li>
+              <li class="active"><a href = "viewUsers">View doctors</a></li>
+             
+            </ul>
+          </div>
+     </div> 
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form autocomplete="off" action="#" th:action="@{/admin/addUser}"
+					th:object="${addDoctor}" method="post" class="form-horizontal"
+					role="form">
+					<h2>Registration Form</h2>
+										<div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{cnp}" placeholder="CNP"
+								class="form-control" /> 
+						</div>
+						
+						<div class="col-sm-9">
+						<input type="text" th:field="*{firstName}" placeholder="First Name"
+								class="form-control" /> 
+						</div>
+						<div class="col-sm-9">
+						<input type="text" th:field="*{lastName}" placeholder="Last Name"
+								class="form-control" /> 
+						</div>
+						
+																		
+						<div class="col-sm-9">
+						<input type="phone" th:field="*{phone}" placeholder="Phone Number"
+								class="form-control" /> 
+						</div>
+						
+						<div class="col-sm-9">
+						<input type="email" th:field="*{email}" placeholder="Email"
+								class="form-control" /> 
+						</div>
+										
+						<div class="col-sm-9">
+						<input type="text" th:field="*{degree}" placeholder="Degree"
+								class="form-control" /> 
+						</div>
+						
+						<div class="col-sm-9">
+						<input type="text" th:field="*{description}" placeholder="Description"
+								class="form-control" /> 
+						</div>
+						
+						<div class="col-sm-9">
+						<input type="text" th:field="*{parafa}" placeholder="Cod Parafa"
+								class="form-control" /> 
+						</div>
+						
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Add User</button>
+						</div>
+					</div>
+					
+					<span th:utext="${successMessage}"></span>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	 <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+          <div class="navbar-header">
+    </div></div></div>
+
+</body>
+</html>
