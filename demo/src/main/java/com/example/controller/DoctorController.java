@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -99,21 +101,19 @@ public class DoctorController {
 		ModelAndView modelAndView = new ModelAndView();
 		Pacient pacient = pacientService.findById(id);
 		Results result = new Results();
+		Doctor doctor = doctorService.findById(1);
 		modelAndView.addObject("pacientTR", pacient);
 		modelAndView.addObject("addVisitResult", result);
+		modelAndView.addObject("doctorTR", doctor);
 		modelAndView.setViewName("doctor/addVisitResult");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.POST)
-	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult, @Valid Results result) {
+	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult, @Valid Results result)
+	{
 		Doctor doctorNew = new Doctor();
-		/*if (bindingResult.getFieldValue("xxx").equals("Tarchila")) {
-			 doctorNew = doctorService.findById(1);
-		} else {
-			 doctorNew = doctorService.findById(2);
-		}*/
-		doctorNew = doctorService.findById(1);
+		doctorNew = doctorService.findById(2);
 		result.setDoctorRes(doctorNew);
 
 		pacientService.saveResult(pacient.getId(), result);

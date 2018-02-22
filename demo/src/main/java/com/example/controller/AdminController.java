@@ -30,6 +30,8 @@ public class AdminController {
 	
 	@Autowired
 	private DoctorService doctorService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/admin/viewUsers", method = RequestMethod.GET)
 	public ModelAndView viewUsers() {
@@ -58,19 +60,23 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 		Doctor doctor = new Doctor();
 		modelAndView.addObject("addDoctor", doctor);
+		User user = userService.findUserByEmail("i@t.ro");
+		modelAndView.addObject("addUserX", user);
+		
 		modelAndView.setViewName("admin/addUser");
 		return modelAndView;
 
 	}
 	@RequestMapping(value = "/admin/addUser", method = RequestMethod.POST)
-	public ModelAndView addUser(@Valid Doctor doctor, BindingResult bindingResult) {
+	public ModelAndView addUser(@Valid Doctor doctor, BindingResult bindingResult,User user) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		Doctor doctorExists = doctorService.findByCnp(doctor.getCnp());
 		if (doctorExists != null) 
 			modelAndView.setViewName("admin/addUser");
 		else {
-			doctorService.addDoctor(doctor);
+			User user2 = userService.findUserById(user.getId());
+			doctorService.addDoctor(doctor, user2);
 			modelAndView.setViewName("admin/viewUsers");
 		}
 		return modelAndView;

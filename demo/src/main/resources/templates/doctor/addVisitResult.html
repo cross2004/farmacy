@@ -62,6 +62,7 @@
 						<input type="text" th:field="${pacientTR.lastName}" placeholder="${Nume}"
 								class="form-control" /> 
 						</div></div>
+						
  					
 						<div class="form-group">
 							
@@ -76,10 +77,15 @@
 						<input type="text" th:field="*{descr}" placeholder="Descriere"
 								class="form-control" /> 
 						</div></div>
+			      	<div class="form-group">
+							
+						<div class="col-sm-9">
+						<input type="text" th:field="${doctorTR.id}" placeholder="${doctorTR.id}"
+								class="form-control" /> 
+						</div></div>
+			      		
+		
 						
-						<div class="form-group">
-						
-					</div>
 				
 					<div class="form-group">
 						<div class="col-sm-9">

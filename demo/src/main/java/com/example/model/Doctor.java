@@ -1,13 +1,18 @@
 package com.example.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,6 +45,10 @@ public class Doctor {
 	@OneToMany(mappedBy="doctorRes")
 	private List<Results> resultss;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_doctor", joinColumns = @JoinColumn(name = "doctor_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> users;
+	
 	public int getId() {
 		return id;
 	}
@@ -122,5 +131,15 @@ public class Doctor {
 
 	public void setResults(List<Results> resultss) {
 		this.resultss = resultss;
+	}
+	public Set<User> getUsers() {
+		 if (users == null) {
+		        users = new HashSet<User>();
+		    }
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

@@ -2,11 +2,14 @@ package com.example.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.model.Pacient;
+import com.example.model.Results;
 import com.example.model.Role;
 import com.example.model.User;
 import com.example.repository.RoleRepository;
@@ -43,8 +46,15 @@ public class UserServiceImpl implements UserService {
 			Role userRole = roleRepository.findByRole("HELPDESK");
 			user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		}
-
+	
 		userRepository.save(user);
 	}
 
-}
+	@Override
+	public User findUserById(int id) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(id);
+	}
+
+	
+	}

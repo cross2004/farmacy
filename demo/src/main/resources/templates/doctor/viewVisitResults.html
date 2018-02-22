@@ -65,10 +65,8 @@
     <tr>
      <td th:text="${Result.dateVisit}"> dateVisit</td>
      <td th:text="${Result.descr}"> Result</td> 
-      <th:block th:each="Doctor : ${Result.doctorRes}"> 
-      <td th:text="${Doctor.firstName}"> Name</td> 
-     
-    
+       <th:block th:each="Doctor : ${Result.doctorRes}"> 
+        <td th:text="${Doctor.firstName}"> Name</td> 
      
     </tr>
     </th>

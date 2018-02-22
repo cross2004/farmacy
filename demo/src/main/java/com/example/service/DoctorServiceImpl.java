@@ -1,11 +1,16 @@
 package com.example.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Doctor;
+import com.example.model.Pacient;
+import com.example.model.Results;
+import com.example.model.User;
 import com.example.repository.DoctorRepository;
 
 @Service("doctorService")
@@ -14,13 +19,17 @@ public class DoctorServiceImpl implements DoctorService {
 	private DoctorRepository doctorRepository;
 
 	@Override
-	public void addDoctor(Doctor doctor) {
-		doctor.setFirstName(doctor.getFirstName());
+	public void addDoctor(Doctor doctor, User user) {
+		/*doctor.setFirstName(doctor.getFirstName());
 		
 		doctor.setLastName(doctor.getLastName());
 		doctor.setDescription(doctor.getDescription());
 		doctor.setDegree(doctor.getDegree());
-		doctor.setActive(doctor.getActive());
+		doctor.setActive(doctor.getActive());*/
+    
+		Set<User> set = doctor.getUsers();
+	    set.add(user);
+	        
 		doctorRepository.save(doctor);
 
 	}
@@ -36,6 +45,12 @@ public class DoctorServiceImpl implements DoctorService {
 		//doctor.setDescription(doctor.getDescription());
 		//doctor.setDegree(doctor.getDegree());
 		//doctor.setActive(doctor.getActive());
+		Doctor doctor1 = doctorRepository.findById(doctor.getId());
+
+		Set<User> set = doctor1.getUsers();
+	   // set.add(user);
+	    
+		doctor.setUsers(set);
 		doctorRepository.save(doctor);
 	}
 
