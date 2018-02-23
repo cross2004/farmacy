@@ -40,7 +40,9 @@
 			<div class="col-md-6 col-md-offset-3">
 			
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for pacient" title="Type in a name">
+<br>
 <input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Search for start time" title="Type in an hour">
+<br>
 <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for doctor" title="Type in a doctor">
 
 <div>
@@ -56,11 +58,18 @@
 
 <th:block th:each="Schedule : ${schAll}">
 <tr>
-   <td th:text="${Schedule.doctorId}"> Doctor</td> 
+   <td>   <th:block th:each="Doctor : ${allDoctors}">
+     <div th:if="${Doctor.id == Schedule.doctorId}" >
+      <div th:text="${Doctor.firstName}+' '+${Doctor.lastName}"></div>
+     </th>
+     </div>
+   </th:block>
+   </td>
    <td>   <th:block th:each="Pacient : ${allPacients}">
-     <th:if="${Pacient.id == Schedule.pacientId}" >
+     <div th:if="${Pacient.id == Schedule.pacientId}" >
       <div th:text="${Pacient.firstName}+' '+${Pacient.lastName}"></div>
      </th>
+     </div>
    </th:block>
    </td>
    <td th:text="${Schedule.details}">details</td> 

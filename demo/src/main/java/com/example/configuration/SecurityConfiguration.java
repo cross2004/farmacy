@@ -52,7 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/helpDesk/**").hasAuthority("HELPDESK")
 				.antMatchers("/doctor/**").hasAuthority("USER")
 				
-				.and().csrf().disable()
+				.and()
+				.csrf().disable()
 				.formLogin().successHandler(customAuthenticationSuccessHandler)
 				
 				.loginPage("/login").failureUrl("/login?error=true")

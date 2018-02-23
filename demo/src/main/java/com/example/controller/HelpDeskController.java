@@ -41,6 +41,7 @@ public class HelpDeskController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("schAll", scheduleService.findAll());
 		modelAndView.addObject("allPacients", pacientService.findAll());
+		modelAndView.addObject("allDoctors", doctorService.findAllDoctors());
 		modelAndView.setViewName("helpdesk/viewScheduleAll");
 		return modelAndView;
 	}
@@ -62,6 +63,8 @@ public class HelpDeskController {
 		modelAndView.addObject("doctorSel", doctorSel);
 		List<Doctor> doctors = doctorService.findAllDoctors();
 		modelAndView.addObject("doctors", doctors);
+		List<Pacient> pacients = pacientService.findAll();
+		modelAndView.addObject("pacients", pacients);
 		modelAndView.setViewName("helpdesk/addAppointment");
 		return modelAndView;
 	}
