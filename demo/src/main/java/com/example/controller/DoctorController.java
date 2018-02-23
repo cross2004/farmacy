@@ -1,6 +1,8 @@
 package com.example.controller;
 
+
 import java.util.List;
+import java.util.logging.*;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,8 @@ public class DoctorController {
 	private ScheduleService scheduleService;
 	@Autowired
 	private DoctorService doctorService;
-
+	private static final Logger logger = Logger.getLogger(DoctorController.class.getName());
+	 
 	@RequestMapping(value = "/doctor/doctor", method = RequestMethod.GET)
 	public ModelAndView doctor() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -101,22 +104,29 @@ public class DoctorController {
 		ModelAndView modelAndView = new ModelAndView();
 		Pacient pacient = pacientService.findById(id);
 		Results result = new Results();
-		Doctor doctor = doctorService.findById(1);
+		// Doctor doctor = new Doctor();
+
+		// doctorService.findById(1);
 		modelAndView.addObject("pacientTR", pacient);
 		modelAndView.addObject("addVisitResult", result);
-		modelAndView.addObject("doctorTR", doctor);
+		// modelAndView.addObject("doctorTR", doctor);
 		modelAndView.setViewName("doctor/addVisitResult");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.POST)
-	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult, @Valid Results result)
-	{
-		Doctor doctorNew = new Doctor();
-		doctorNew = doctorService.findById(2);
-		result.setDoctorRes(doctorNew);
+	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult, @Valid Results result) {
 
-		pacientService.saveResult(pacient.getId(), result);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+
+		Doctor doctorNew = doctorService.findDoctorFromUser(user);
+		if (doctorNew != null) {
+			result.setDoctorRes(doctorNew);
+			pacientService.saveResult(pacient.getId(), result);
+		} else
+			logger.info("User has no doctor attached!");
+
 		return "redirect:viewPacients";
 	}
 

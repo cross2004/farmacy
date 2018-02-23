@@ -20,16 +20,17 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public void addDoctor(Doctor doctor, User user) {
-		/*doctor.setFirstName(doctor.getFirstName());
-		
-		doctor.setLastName(doctor.getLastName());
-		doctor.setDescription(doctor.getDescription());
-		doctor.setDegree(doctor.getDegree());
-		doctor.setActive(doctor.getActive());*/
-    
+		/*
+		 * doctor.setFirstName(doctor.getFirstName());
+		 * 
+		 * doctor.setLastName(doctor.getLastName());
+		 * doctor.setDescription(doctor.getDescription());
+		 * doctor.setDegree(doctor.getDegree()); doctor.setActive(doctor.getActive());
+		 */
+
 		Set<User> set = doctor.getUsers();
-	    set.add(user);
-	        
+		set.add(user);
+
 		doctorRepository.save(doctor);
 
 	}
@@ -41,15 +42,15 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	public void editDoctor(Doctor doctor) {
-		//doctor.setFirstName(doctor.getFirstName());
-		//doctor.setDescription(doctor.getDescription());
-		//doctor.setDegree(doctor.getDegree());
-		//doctor.setActive(doctor.getActive());
+		// doctor.setFirstName(doctor.getFirstName());
+		// doctor.setDescription(doctor.getDescription());
+		// doctor.setDegree(doctor.getDegree());
+		// doctor.setActive(doctor.getActive());
 		Doctor doctor1 = doctorRepository.findById(doctor.getId());
 
 		Set<User> set = doctor1.getUsers();
-	   // set.add(user);
-	    
+		// set.add(user);
+
 		doctor.setUsers(set);
 		doctorRepository.save(doctor);
 	}
@@ -59,6 +60,7 @@ public class DoctorServiceImpl implements DoctorService {
 		// TODO Auto-generated method stub
 		return doctorRepository.findById(id);
 	}
+
 	@Override
 	public Doctor findByCnp(String cnp) {
 		// TODO Auto-generated method stub
@@ -67,9 +69,19 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public List<Doctor> findAllDoctors() {
-		// TODO Auto-generated method stub
+
 		return doctorRepository.findAll();
 	}
 
-	
+	@Override
+	public Doctor findDoctorFromUser(User user) {
+		for (Doctor doctor : doctorRepository.findAll()) {
+			Set<User> users = doctor.getUsers();
+			for (User i : users)
+				if (i.getId() == user.getId())
+					return doctor;
+		}
+		return null;
+	}
+
 }

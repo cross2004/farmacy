@@ -13,5 +13,5 @@ public interface DoctorService {
 	public void addDoctor(Doctor doctor, User user);
 	public void inactivateDoctor(Doctor doctor);
 	public void editDoctor(Doctor doctor);
-	
+	public Doctor findDoctorFromUser(User user);
 }
