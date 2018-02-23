@@ -42,21 +42,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		
 		http.authorizeRequests()
 
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
 				.antMatchers("/registration").permitAll()
-				.antMatchers("/helpDesk/**").permitAll()
-				.antMatchers("/doctor/**").permitAll()
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/helpDesk/**").hasAuthority("HELPDESK")
+				.antMatchers("/doctor/**").hasAuthority("USER")
 				
-				.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
 				.and().csrf().disable()
 				.formLogin().successHandler(customAuthenticationSuccessHandler)
 				
 				.loginPage("/login").failureUrl("/login?error=true")
-				//.defaultSuccessUrl("/admin/home")
+				
 				
 				.usernameParameter("email").passwordParameter("password").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and()
@@ -67,12 +67,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
-	 @Autowired
+	/* @Autowired
 	  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 	        auth
 	            .inMemoryAuthentication()
 	                .withUser("user").password("user").roles("USER")
 	                .and()
 	        		.withUser("admin").password("admin").roles("ADMIN");
-	    }
+	    }*/
 }

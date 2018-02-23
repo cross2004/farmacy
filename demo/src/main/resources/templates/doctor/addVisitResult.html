@@ -40,10 +40,21 @@
 					role="form">
 					<h2>Registration Form</h2>
 					  <div class="form-group">
-						<div class="col-sm-9">
 						<input type="hidden" th:field="${pacientTR.id}" placeholder="id"
 								class="form-control" /> 
-						</div></div>
+							<input type="hidden" th:field="${pacientTR.email}" placeholder="email"
+								class="form-control" /> 
+						<input type="hidden" th:field="${pacientTR.state}" placeholder="state"
+								class="form-control" /> 
+						<input type="hidden" th:field="${pacientTR.city}" placeholder="city"
+								class="form-control" /> 
+						<input type="hidden" th:field="${pacientTR.address}" placeholder="address"
+								class="form-control" /> 
+						<input type="hidden" th:field="${pacientTR.identityCard}" placeholder="identityCard"
+								class="form-control" /> 
+								<input type="hidden" th:field="${pacientTR.phone}" placeholder="identityCard"
+								class="form-control" /> 
+						</div>
 		        <div class="form-group">
 						<div class="col-sm-9">
 						<input type="text" th:field="${pacientTR.cnp}" placeholder="${CNP}"

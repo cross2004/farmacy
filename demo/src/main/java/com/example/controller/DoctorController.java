@@ -1,9 +1,6 @@
 package com.example.controller;
 
-
-import java.util.List;
 import java.util.logging.*;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -33,7 +30,7 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	private static final Logger logger = Logger.getLogger(DoctorController.class.getName());
-	 
+
 	@RequestMapping(value = "/doctor/doctor", method = RequestMethod.GET)
 	public ModelAndView doctor() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -94,7 +91,6 @@ public class DoctorController {
 
 	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.POST)
 	public String editPacient(@Valid Pacient pacient, BindingResult bindingResult) {
-		// pacient.setId(pacient.getId());
 		pacientService.savePacient(pacient);
 		return "redirect:viewPacients";
 	}
@@ -102,20 +98,19 @@ public class DoctorController {
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.GET)
 	public ModelAndView addVisitResult(int id) {
 		ModelAndView modelAndView = new ModelAndView();
-		Pacient pacient = pacientService.findById(id);
-		Results result = new Results();
-		// Doctor doctor = new Doctor();
 
-		// doctorService.findById(1);
+		Pacient pacient = pacientService.findById(id);
 		modelAndView.addObject("pacientTR", pacient);
+
+		Results result = new Results();
 		modelAndView.addObject("addVisitResult", result);
-		// modelAndView.addObject("doctorTR", doctor);
+
 		modelAndView.setViewName("doctor/addVisitResult");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/doctor/addVisitResult", method = RequestMethod.POST)
-	public String addVisitResult(@Valid Pacient pacient, BindingResult bindingResult, @Valid Results result) {
+	public String addVisitResult(@Valid Pacient pacient, @Valid Results result) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());

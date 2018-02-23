@@ -16,6 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "doctor")
 public class Doctor {
@@ -24,15 +27,23 @@ public class Doctor {
 	@Column(name = "doctor_id")
 	private int id;
 	@Column(name = "last_name")
+	@NotEmpty(message = "*Please provide your last name")
 	private String lastname;
 	@Column(name = "first_name")
+	@NotEmpty(message = "*Please provide your first name")
 	private String firstname;
 	@Column(name = "CNP")
+	@NotEmpty(message = "*Please provide your  cnp")
 	private String cnp;
 	@Column(name = "phone")
+	@NotEmpty(message = "*Please provide your phone")
 	private String phone;
+	
 	@Column(name = "email")
+	@Email(message = "*Please provide a valid Email")
+	@NotEmpty(message = "*Please provide an email")
 	private String email;
+	
 	@Column(name = "degree")
 	private String degree;
 	@Column(name = "description")

@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,12 @@ public class UserServiceImpl implements UserService {
 	public User findUserById(int id) {
 		// TODO Auto-generated method stub
 		return userRepository.findById(id);
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
 	}
 
 	
