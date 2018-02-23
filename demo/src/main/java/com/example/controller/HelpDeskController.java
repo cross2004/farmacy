@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.model.Schedule;
 import com.example.model.User;
+import com.example.model.Doctor;
 import com.example.model.Material;
+import com.example.model.Pacient;
 import com.example.service.MaterialsService;
 import com.example.service.PacientService;
 import com.example.service.ScheduleService;
 import com.example.service.UserService;
+import com.example.service.DoctorService;
+
 
 @Controller
 public class HelpDeskController {
@@ -27,6 +31,8 @@ public class HelpDeskController {
 	private ScheduleService scheduleService;
 	@Autowired
 	private MaterialsService materialsService;
+	@Autowired
+	private DoctorService doctorService;
 	@Autowired
 	private UserService userService;
 
@@ -52,6 +58,10 @@ public class HelpDeskController {
 		ModelAndView modelAndView = new ModelAndView();
 		Schedule schedule = new Schedule();
 		modelAndView.addObject("schedule", schedule);
+		Doctor doctorSel = new Doctor();
+		modelAndView.addObject("doctorSel", doctorSel);
+		List<Doctor> doctors = doctorService.findAllDoctors();
+		modelAndView.addObject("doctors", doctors);
 		modelAndView.setViewName("helpdesk/addAppointment");
 		return modelAndView;
 	}
@@ -61,7 +71,7 @@ public class HelpDeskController {
 	}
 
 	@RequestMapping(value = "/helpdesk/addAppointment", method = RequestMethod.POST)
-	public ModelAndView addAppointment(@Valid Schedule schedule) {
+	public ModelAndView addAppointment(@Valid Schedule schedule, Doctor doctor) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<Schedule> schedule2 = scheduleService.findAll();
 		boolean overlap = false;
@@ -71,8 +81,9 @@ public class HelpDeskController {
 				overlap = true;
 		}
 		if (!overlap)
-			scheduleService.saveSchedule(schedule);
-		modelAndView.setViewName("helpdesk/addAppointment");
+		 	
+		  scheduleService.saveSchedule(schedule, doctor);
+		modelAndView.setViewName("helpdesk/viewScheduleAll");
 		return modelAndView;
 	}
 
@@ -110,7 +121,8 @@ public class HelpDeskController {
 		modelAndView.addObject("userName", "Bine ai venit " + user.getName() + " " + user.getLastName());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("helpdesk/helpDesk");
-		modelAndView.addObject("findPacientsSuggestedDate", pacientService.findPacientsSuggestedDate());
+		List<Pacient> pacientNext = pacientService.findPacientsSuggestedDate();
+		modelAndView.addObject("findPacientsSuggestedDate", pacientNext);
 		return modelAndView;
 	}
 

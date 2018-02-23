@@ -44,13 +44,17 @@
 <tr>
   <th scope="col">Descr</th>
   <th scope="col">Active</th>
+  <th scope="col">Quantity</th>
+  
  </tr>
    
 <th:block th:each="Material : ${viewMaterials}">
   <tr>
         <td th:text="${Material.details}"> details</td> 
-        <td th:text="${Material.active}"> active</td> 
-        <td th:hidden="${Material.id}"> active</td> 
+        <td th:text="${Material.active}"> active</td>
+        <td th:text="${Material.quantity}"> quantity</td>  
+        <td th:hidden="${Material.id}"> id</td> 
+        
   <td>  <a th:href="@{editMaterials(id=${Material.id})}">edit</a></td>  
   </tr>
 </table>

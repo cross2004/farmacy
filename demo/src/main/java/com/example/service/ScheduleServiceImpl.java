@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.model.Doctor;
 import com.example.model.Schedule;
 import com.example.repository.ScheduleRepository;
 
@@ -20,13 +22,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	@Override
-	public void saveSchedule(Schedule schedule) {
+	public void saveSchedule(Schedule schedule, Doctor doctor) {
 		schedule.setDetails(schedule.getDetails());
 		schedule.setDoctorId(schedule.getDoctorId());
 		//schedule.setLastDate(schedule.getLastDate());
 		schedule.setPacientId(schedule.getPacientId());
 		schedule.setStartTime(schedule.getStartTime());
 		schedule.setEndTime(schedule.getEndTime());
+		schedule.setDoctorId(doctor.getId());
 		scheduleRepository.save(schedule);
 	}
 

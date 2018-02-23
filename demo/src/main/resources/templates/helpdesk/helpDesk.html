@@ -65,6 +65,8 @@
   <th scope="col">BirthDate</th>
   <th scope="col">Email</th>   
   <th scope="col">Phone</th>   
+  <th scope="col">Suggested Date</th>  
+   <th scope="col">Suggested treatment</th>  
  </tr>
 
 <th:block th:each="Pacient : ${findPacientsSuggestedDate}">
@@ -76,11 +78,10 @@
         <td th:text="${Pacient.city}">City</td>
         <td th:text="${Pacient.address}">Address</td>
         <td th:text="${Pacient.birthDate}">BirthDate</td>
-        <td th:text="${Pacient.email}">email</td>
-        
+        <td th:text="${Pacient.email}">email</td>  
         <td th:text="${Pacient.phone}">Phone</td>
-        
-        
+        <td th:text="${Pacient.suggestedDate}">suggestedDate</td>
+        <td th:text="${Pacient.suggestedTreatment}">suggestedTreatment</td>
        </tr>
      </th:block>
 </table>
