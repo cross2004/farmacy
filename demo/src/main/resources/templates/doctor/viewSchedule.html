@@ -38,10 +38,7 @@
     <img th:src="@{/images/team.jpg}" class="img-responsive center-block"   />
     <br>
       
-   <div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-			
+   		
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for pacient" title="Type in a name">
 <input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Search for start time" title="Type in an hour">
 
@@ -61,9 +58,9 @@
    <td th:text="${Schedule.doctorId}"> Doctor</td> 
    <td>
    <th:block th:each="Pacient : ${allPacients}">
-     <h2 th:if="${Pacient.id == Schedule.pacientId}" >
+     <th:if="${Pacient.id == Schedule.pacientId}" >
       <div th:text="${Pacient.firstName}+' '+${Pacient.lastName}"></div>
-     </h2>
+    
    </th:block>
    </td>
    <td th:text="${Schedule.details}">details</td> 
@@ -75,9 +72,7 @@
 
 </table>
  </div>
-  		</div>			
-  		</div>
-  		</div>	
+  			
   		
 <script>
 function myFunction() {
