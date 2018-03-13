@@ -50,10 +50,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/editUser", method = RequestMethod.POST)
 	public String editUser(@Valid Doctor doctor, BindingResult bindingResult) {
-		// if (bindingResult.hasErrors())
-		// logger.log(Level.SEVERE, "Edit not performed, doctor has errors!" +
-		// bindingResult.getAllErrors());
-		// else
 		doctorService.editDoctor(doctor);
 		return "redirect:viewUsers";
 	}
@@ -63,7 +59,7 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		Doctor doctor = new Doctor();
-		modelAndView.addObject("Doctor", doctor);
+		modelAndView.addObject("doctor", doctor);
 
 		List<User> user = userService.findAll();
 		modelAndView.addObject("addUserX", user);
@@ -78,11 +74,11 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/addUser", method = RequestMethod.POST)
-	public String addUser(@Valid  Doctor doctor, BindingResult bindingResult, User user, Model model) {
+	public String addUser(@Valid Doctor doctor, BindingResult bindingResult, User user, Model model) {
 		String modelAndView = "admin/viewUsers";
 		String modelAndView1 = "admin/addUser";
 
-		Boolean exista = false;
+		Boolean exists = false;
 		if (bindingResult.hasErrors()) {
 			User userSel = new User();
 			userSel.setId(1);
@@ -96,9 +92,9 @@ public class AdminController {
 			}
 
 			else {
-				//don't use romanian ever!!!!
-				exista = existaUserAsociat(user);
-				if (exista.equals(false)) {
+
+				exists = existsLinkedUser(user);
+				if (exists.equals(false)) {
 					User user2 = userService.findUserById(user.getId());
 					doctorService.addDoctor(doctor, user2);
 				} else {
@@ -111,12 +107,10 @@ public class AdminController {
 			}
 
 			return modelAndView;
-
 		}
-
 	}
 
-	public Boolean existaUserAsociat(User user) {
+	public Boolean existsLinkedUser(User user) {
 		List<Doctor> listDoc = doctorService.findAllDoctors();
 		for (Doctor d : listDoc) {
 			Set<User> users = d.getUsers();
@@ -124,7 +118,6 @@ public class AdminController {
 				if (u.getId() == user.getId()) {
 					return true;
 				}
-
 		}
 		return false;
 	}

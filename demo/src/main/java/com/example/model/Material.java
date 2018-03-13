@@ -22,6 +22,7 @@ import java.util.Set;
 public class Material {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	@Column(name = "material_id")
 	private int id;
 
@@ -29,6 +30,7 @@ public class Material {
 	private int active;
 
 	@Column(name = "details")
+	@NotEmpty(message = "*Please provide details")
 	private String details;
 
 	@Column(name = "quantity")

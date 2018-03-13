@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -27,20 +28,25 @@ public class Schedule {
 	@Column(name = "id")
 	private int id;
 	
+	
 	@Column(name = "pacient_id")
+	
 	private int pacientId;
 	
+
 	@Column(name = "doctor_id")
+	
 	private int doctorId;
 	
 	@Column(name = "details")
 	private String details;
 	
-	
+	@NotEmpty(message = "*Please provide the start time")
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
 	@Column(name = "startTime")
 	private Date startTime;
 
+	@NotEmpty(message = "*Please provide the end time")
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
 	@Column(name = "endTime")
 	private Date endTime;

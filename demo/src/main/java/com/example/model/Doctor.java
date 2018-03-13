@@ -28,10 +28,10 @@ public class Doctor {
 	private int id;
 	@Column(name = "last_name")
 	@NotEmpty(message = "*Please provide your last name")
-	private String lastname;
+	private String lastName;
 	@Column(name = "first_name")
 	@NotEmpty(message = "*Please provide your first name")
-	private String firstname;
+	private String firstName;
 	@Column(name = "CNP")
 	@NotEmpty(message = "*Please provide your  cnp")
 	private String cnp;
@@ -43,7 +43,6 @@ public class Doctor {
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
 	private String email;
-	
 	@Column(name = "degree")
 	private String degree;
 	@Column(name = "description")
@@ -77,18 +76,18 @@ public class Doctor {
 	}
 
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 
-	public void setLastName(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getFirstName() {
-		return firstname;
+		return firstName;
 	}
 
-	public void setFirstName(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	public int getActive() {
 		return activeDoc;

@@ -22,5 +22,5 @@ public interface PacientRepository  extends JpaRepository<Pacient, Long> {
 	@Query("SELECT p FROM Pacient p where p.id= :id")
 	Pacient editPacient(@Param("id") int id);
 	@Query("SELECT p FROM Pacient p where p.suggestedDate > CURDATE() ")
-	List<Pacient> findPacientsSuggestedDate(Date dt);
+	List<Pacient> findPacientsSuggestedDate();
 }

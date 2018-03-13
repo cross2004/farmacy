@@ -43,7 +43,10 @@
 					 <div class="form-group">									
 						<div class="col-sm-9">
 					    Details
-						<input type="text" th:field="*{details}" placeholder="details"
+					    	 <label th:if="${#fields.hasErrors('details')}" th:errors="*{details}"
+								class="validation-message"></label> 
+					
+					   		<input type="text" th:field="*{details}" placeholder="details"
 								class="form-control" /> 
 						</div>				
 					</div>

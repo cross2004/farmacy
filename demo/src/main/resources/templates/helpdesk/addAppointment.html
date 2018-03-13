@@ -61,6 +61,9 @@
 					<div class="form-group">
 						<div class="col-sm-9">
 						Start Time (yyyy-mm-dd)
+						  <label th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"
+								class="validation-message"></label>
+					
 						 <input type="text" th:field="*{startTime}" placeholder="startTime YYYY-MM-DD"
 								class="form-control" /> 
 						</div>
@@ -68,6 +71,9 @@
 					<div class="form-group">
 		  				<div class="col-sm-9">
 		  				End Time (yyyy-mm-dd)
+		  					  <label th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"
+								class="validation-message"></label>
+					
 						 <input type="text" th:field="*{endTime}" placeholder="endTime YYYY-MM-DD"
 								class="form-control" /> 
 						</div>

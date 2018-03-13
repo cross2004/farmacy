@@ -19,7 +19,7 @@ public void addResult(Results result);
 public Pacient editPacient(int id); 
 public Results addVisitResult(int id); 
 public void saveResult(int id, Results result); 
-public List<Pacient> findPacientsSuggestedDate(LocalDate ld);
+public List<Pacient> findPacientsSuggestedDate();
 public List<Pacient> findAll(); 
 
 }

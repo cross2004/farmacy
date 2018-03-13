@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,28 +62,23 @@ public class DoctorController {
 	}
 
 	@RequestMapping(value = "/doctor/addNewPacient", method = RequestMethod.POST)
-	public String addNewPacient(@Valid Pacient pacient, BindingResult bindingResult) {
-		// ModelAndView modelAndView = new ModelAndView();
-
+	public String addNewPacient(@Valid Pacient pacient, BindingResult bindingResult, Model model) {
+		
 		Pacient pacientExists = pacientService.findPacientByCnp(pacient.getCnp());
 		if (pacientExists != null) {
 			bindingResult.rejectValue("cnp", "error.pacient",
-
 					"There is already a pacient registered with the CNP provided");
+			model.addAttribute("errMessage", "Pacient already exists");
 		}
 		if (bindingResult.hasErrors()) {
-			// modelAndView.setViewName("doctor/addNewPacient");
-			return "redirect:addNewPacient";
+			model.addAttribute("errMessage", "User has null values");
+			return "doctor/addNewPacient";
 		} else {
 
 			pacientService.savePacient(pacient);
-			// modelAndView.addObject("successMessage", "Pacient has been registered
-			// successfully");
-			// modelAndView.setViewName("doctor/viewPacients");
-			return "redirect:viewPacients";
+			return "doctor/viewPacients";
 		}
-		// return modelAndView;
-		// return "redirect:viewPacients";
+	
 	}
 
 	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.GET)

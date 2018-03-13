@@ -129,9 +129,10 @@ public class PacientServiceImpl implements PacientService {
 	}
 	
 	@Override
-	public List<Pacient> findPacientsSuggestedDate(LocalDate ld) {
-		Date date = new Date("2018-04-01");
-    		return  pacientRepository.findPacientsSuggestedDate(date);
+	public List<Pacient> findPacientsSuggestedDate() {
+		LocalDate dt = LocalDate.now();//.plusDays(30);
+		
+    		return  pacientRepository.findPacientsSuggestedDate();
 
 	}
 	

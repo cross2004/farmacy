@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,20 +78,33 @@ public class HelpDeskController {
 	}
 
 	@RequestMapping(value = "/helpdesk/addAppointment", method = RequestMethod.POST)
-	public ModelAndView addAppointment(@Valid Schedule schedule, Doctor doctor) {
-		ModelAndView modelAndView = new ModelAndView();
-		List<Schedule> schedule2 = scheduleService.findAll();
-		boolean overlap = false;
-		for (int i = 0; i < schedule2.size(); i++) {
-			if ((schedule2.get(i).getStartTime() != null) && (isOverlapping(schedule2.get(i).getStartTime(),
-					schedule2.get(i).getEndTime(), schedule.getStartTime(), schedule.getEndTime())))
-				overlap = true;
-		}
-		if (!overlap)
+	public String addAppointment(@Valid Schedule schedule, BindingResult bindingResult, Model model, Doctor doctor) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("errMessage", "Appointment has null values");
 
-			scheduleService.saveSchedule(schedule, doctor);
-		modelAndView.setViewName("helpdesk/viewScheduleAll");
-		return modelAndView;
+			model.addAttribute("schedule", schedule);
+			Doctor doctorSel = new Doctor();
+			model.addAttribute("doctorSel", doctorSel);
+			List<Doctor> doctors = doctorService.findAllDoctors();
+			model.addAttribute("doctors", doctors);
+			List<Pacient> pacients = pacientService.findAll();
+			model.addAttribute("pacients", pacients);
+
+			return ("helpdesk/addAppointment");
+		} else {
+			List<Schedule> schedule2 = scheduleService.findAll();
+			boolean overlap = false;
+			for (int i = 0; i < schedule2.size(); i++) {
+				if ((schedule2.get(i).getStartTime() != null) && (isOverlapping(schedule2.get(i).getStartTime(),
+						schedule2.get(i).getEndTime(), schedule.getStartTime(), schedule.getEndTime())))
+					overlap = true;
+			}
+			if (!overlap)
+
+				scheduleService.saveSchedule(schedule, doctor);
+			return ("helpdesk/viewScheduleAll");
+		}
+
 	}
 
 	@RequestMapping(value = "/helpdesk/addMaterials", method = RequestMethod.GET)
@@ -103,9 +117,15 @@ public class HelpDeskController {
 	}
 
 	@RequestMapping(value = { "/helpdesk/addMaterials", "/helpdesk/editMaterials" }, method = RequestMethod.POST)
-	public String addMaterial(@Valid Material material, BindingResult bindingResult) {
-		materialsService.saveMaterial(material);
-		return "redirect:viewMaterials";
+	public String addMaterial(@Valid Material material, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("addMat", material);
+			model.addAttribute("errMessage", "User has null values");
+			return "helpdesk/addMaterials";
+		} else {
+			materialsService.saveMaterial(material);
+			return "helpdesk/viewMaterials";
+		}
 	}
 
 	@RequestMapping(value = "/helpdesk/editMaterials", method = RequestMethod.GET)
@@ -126,10 +146,11 @@ public class HelpDeskController {
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("helpdesk/helpDesk");
 
-		LocalDate dt = LocalDate.now().plusDays(30);
+		// LocalDate dt = LocalDate.now().plusDays(30);
+		// Date date1 = new Date();
 		;
 
-		List<Pacient> pacientNext = pacientService.findPacientsSuggestedDate(dt);
+		List<Pacient> pacientNext = pacientService.findPacientsSuggestedDate();
 		modelAndView.addObject("findPacientsSuggestedDate", pacientNext);
 		return modelAndView;
 	}
