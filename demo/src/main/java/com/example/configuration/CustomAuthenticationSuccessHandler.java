@@ -27,8 +27,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
 		logger.info("AT onAuthenticationSuccess(...) function!");
 
+	//	for (GrantedAuthority auth : authentication.getAuthorities()) {
 		for (GrantedAuthority auth : authentication.getAuthorities()) {
-			if ("ADMIN".equals(auth.getAuthority())) {
+		if ("ADMIN".equals(auth.getAuthority())) {
 				admin = true;
 			}
 			if ("USER".equals(auth.getAuthority())) {

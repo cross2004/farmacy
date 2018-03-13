@@ -33,22 +33,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void saveUser(User user, Role role) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setActive(1);
+		User user1 = new User();
+		user1.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user1.setActive(1);
 		if ("USER".equals(role.getRole())) {
 			Role userRole = roleRepository.findByRole("USER");
-			user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+			user1.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		} else if ("ADMIN".equals(role.getRole())) {
 			Role userRole = roleRepository.findByRole("ADMIN");
-			user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+			user1.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		} else
 
 		{
 			Role userRole = roleRepository.findByRole("HELPDESK");
-			user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+			user1.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		}
+	user1.setEmail(user.getEmail());
+	user1.setLastName(user.getLastName());
+	user1.setName(user.getName());
 	
-		userRepository.save(user);
+	
+		userRepository.save(user1);
 	}
 
 	@Override
@@ -61,6 +66,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return userRepository.findAll();
+	}
+
+	@Override
+	public Role findRoleById(int id) {
+		// TODO Auto-generated method stub
+		return roleRepository.findById(id);
 	}
 
 	

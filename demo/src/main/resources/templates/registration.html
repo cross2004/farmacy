@@ -13,9 +13,16 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="login">Login</a>
+            <a class="navbar-brand" href="../logout">Logout</a>
           </div>
-         
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href = "registration">Add new user</a></li>
+              <li class="active"><a href = "admin/addUser">Add new doctor</a></li>
+              <li class="active"><a href = "admin/viewUsers">View doctors</a></li>
+             
+            </ul>
+          </div>
      </div> 
    </div>
    <br>
@@ -31,16 +38,16 @@
 					role="form">
 					<h2>Registration Form</h2>
 										<div class="form-group">
-						<div class="col-sm-9">
+						<div class="col-sm-9">First Name
 						<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
 								class="validation-message"></label>
-						<input type="text" th:field="*{name}" placeholder="Name"
+						<input type="text" th:field="*{name}" placeholder="FirstName"
 								class="form-control" /> 
 						</div>
 					</div>
 
 					<div class="form-group">
-						<div class="col-sm-9">
+						<div class="col-sm-9">Last Name
 						<label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
 								class="validation-message"></label>
 							<input type="text" th:field="*{lastName}"
@@ -48,29 +55,36 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-9">
-							<input type="text" th:field="*{email}" placeholder="Email"
-								class="form-control" /> <label
+						<div class="col-sm-9">Email
+						<label
 								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
 								class="validation-message"></label>
+							<input type="text" th:field="*{email}" placeholder="Email"
+								class="form-control" /> 
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-9">
-							<input type="password" th:field="*{password}"
-								placeholder="Password" class="form-control" /> <label
+						<div class="col-sm-9">Password
+						 <label
 								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
 								class="validation-message"></label>
+							<input type="password" th:field="*{password}"
+								placeholder="Password" class="form-control" />
 						</div>
 					</div>
+				
 					<div class="form-group">
-						<div class="col-sm-9">
-					
-				<input class="form-control"
-          				  type="text" th:value="${Role}" id="Role"  name="Role" 
-          				  placeholder="Admin/User/HelpDesk"/>
-					    </div>
-					</div>
+					<div class="col-sm-9">User
+							
+				<select class="form-control"  th:field="${role.id}" >
+				   <option th:value="1" th:utext="ADMIN"/>
+                   <option th:value="2" th:utext="USER"/>
+                   <option th:value="3" th:utext="HELPDESK"/>
+				
+                                    </select>	
+	          </div>
+			</div>
+			
 					
 					<div class="form-group">
 						<div class="col-sm-9">
@@ -89,5 +103,11 @@
         <div class="container">
           <div class="navbar-header">
     </div></div></div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    
 </body>
 </html>

@@ -18,7 +18,7 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="logout.html">Logout</a>
+            <a class="navbar-brand" href="../logout">Logout</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -44,81 +44,95 @@
 					<h2>Registration Form</h2>
 					 <div class="form-group">
 						<div class="col-sm-9">
-						
-						<input type="text" th:field="*{cnp}" placeholder="CNP"
+						 *CNP
+						 <input type="text" th:field="*{cnp}" placeholder="CNP"
 								class="form-control" /> 
-						</div></div>
-						
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{identityCard}" placeholder="Identity card"
-								class="form-control" /> 
-						</div></div>
-						
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{firstName}" placeholder="First Name"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{lastName}" placeholder="Last Name"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{birthDate}" placeholder="Birth Date"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{state}" placeholder="State"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{city}" placeholder="City"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{Address}" placeholder="Address"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{phone}" placeholder="Phone Number"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{email}" placeholder="Email"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="*{cas}" placeholder="CAS info"
-								class="form-control" /> 
-						</div></div>
-						 <div class="form-group">
-					<div class="col-sm-9">
-						<input type="text" th:field="*{details}" placeholder="Details"
-								class="form-control" /> 
-						 
-						</div></div>
-						
-						
-					
-
-					<div class="form-group">
-						<div class="col-sm-9">
-							<button type="submit" class="btn btn-primary btn-block">Add Pacient</button>
 						</div>
-					</div>
+					  </div>
+					  <div class="form-group">
+						<div class="col-sm-9">
+						 *Identity Card (CI, Passport)
+						 <input type="text" th:field="*{identityCard}" placeholder="Identity card"
+								class="form-control" /> 
+						</div>
+					   </div>
+					   <div class="form-group">
+						<div class="col-sm-9">
+						 *First Name
+						 <input type="text" th:field="*{firstName}" placeholder="First Name"
+								class="form-control" /> 
+					     </div>
+					    </div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  *Last Name
+						  <input type="text" th:field="*{lastName}" placeholder="Last Name"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  Birth Date('yyyy-MM-dd')
+						  <input type="text" th:field="*{birthDate}" placeholder="Birth Date - YYYY-MM-DD"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  *State
+						  <input type="text" th:field="*{state}" placeholder="State"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  *City
+						  <input type="text" th:field="*{city}" placeholder="City"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  *Address
+						  <input type="text" th:field="*{Address}" placeholder="Address"
+								class="form-control" /> 
+					 	 </div>
+					 	</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  *Phone
+						  <input type="text" th:field="*{phone}" placeholder="Phone Number"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  *Email
+						  <input type="text" th:field="*{email}" placeholder="Email"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+						  Info CAS
+						  <input type="text" th:field="*{cas}" placeholder="CAS info"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+					     <div class="col-sm-9">
+					     Details
+						  <input type="text" th:field="*{details}" placeholder="Details"
+								class="form-control" /> 
+						 </div>
+						</div>
+						<div class="form-group">
+						 <div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Add Pacient</button>
+						  </div>
+					     </div>
 					
 					<span th:utext="${successMessage}"></span>
-					
-					
 				</form>
 			</div>
 		</div>

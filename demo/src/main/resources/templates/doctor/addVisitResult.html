@@ -1,114 +1,88 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-	<title> Alexandra Tarchila
-	</title>
-	<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Registration Form</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>	
+<body>&nbsp;</body>
+</html>
+<title>Alexandra Tarchila</title>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<title></title>
+<link rel="stylesheet" th:href="@{/css/registration.css}" type="text/css" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="logout.html">Logout</a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href = "/doctor/addNewPacient">Add new pacient</a></li>
-              <li class="active"><a href = "/doctor/viewPacients">viewPacients</a>/li>
-              <li class="active"><a href = "/doctor/viewSchedule">View schedule</a></li>
-            </ul>
-          </div>
-     </div> 
-   </div>
-   <br>
-   <br>
-   <br>
-   <br>
-  
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<form autocomplete="off" action="#" th:action="@{/doctor/addVisitResult}"
-					th:object="${addVisitResult}" method="post" class="form-horizontal"
-					role="form">
-					<h2>Registration Form</h2>
-					  <div class="form-group">
-						<input type="hidden" th:field="${pacientTR.id}" placeholder="id"
-								class="form-control" /> 
-							<input type="hidden" th:field="${pacientTR.email}" placeholder="email"
-								class="form-control" /> 
-						<input type="hidden" th:field="${pacientTR.state}" placeholder="state"
-								class="form-control" /> 
-						<input type="hidden" th:field="${pacientTR.city}" placeholder="city"
-								class="form-control" /> 
-						<input type="hidden" th:field="${pacientTR.address}" placeholder="address"
-								class="form-control" /> 
-						<input type="hidden" th:field="${pacientTR.identityCard}" placeholder="identityCard"
-								class="form-control" /> 
-								<input type="hidden" th:field="${pacientTR.phone}" placeholder="identityCard"
-								class="form-control" /> 
-						</div>
-		        <div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="${pacientTR.cnp}" placeholder="${CNP}"
-								class="form-control" /> 
-						</div></div>
-						
-		       	<div class="form-group">
-					<div class="col-sm-9">
-				<input type="text" th:field="${pacientTR.firstName}" placeholder="${Prenume}"
-								class="form-control" /> 
-						</div>
-                     </div>
-                  
-					<div class="form-group">
-						<div class="col-sm-9">
-						<input type="text" th:field="${pacientTR.lastName}" placeholder="${Nume}"
-								class="form-control" /> 
-						</div></div>
-						
- 					
-						<div class="form-group">
-							
-						<div class="col-sm-9">
-						<input type="text" th:field="*{dateVisit}" placeholder="Data vizitei YYYY-MM-DD"
-								class="form-control" /> 
-						</div></div>
-						
-						<div class="form-group">
-							
-						<div class="col-sm-9">
-						<input type="text" th:field="*{descr}" placeholder="Descriere"
-								class="form-control" /> 
-						</div></div>
-			      	<div class="form-group">
-							
-				
-					<div class="form-group">
-						<div class="col-sm-9">
-							<button type="submit" class="btn btn-primary btn-block">addVisitResult</button>
-						</div>
-					</div>
-					<span th:utext="${successMessage}"></span>
-				</form>
+<div class="container">
+<div class="navbar-header"><a class="navbar-brand" href="../logout">Logout</a></div>
+
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+	<li class="active"><a href="/doctor/addNewPacient">Add new pacient</a></li>
+	<li class="active"><a href="/doctor/viewPacients">viewPacients</a>/li&gt;</li>
+	<li class="active"><a href="/doctor/viewSchedule">View schedule</a></li>
+</ul>
+</div> </div></div>
+<br/>
+<br/>
+<br/>
+
+<div class="container">
+ <div class="row">
+  <div class="col-md-6 col-md-offset-3">
+   <form action="#" autocomplete="off" class="form-horizontal" method="post" role="form" th:action="@{/doctor/addVisitResult}" th:object="${addVisitResult}">
+    <h2>Registration Form</h2>
+     <div class="form-group">
+       <input class="form-control" placeholder="id" th:field="${pacientTR.id}" type="hidden" /> 
+       <input class="form-control" placeholder="email" th:field="${pacientTR.email}" type="hidden" /> 
+       <input class="form-control" placeholder="state" th:field="${pacientTR.state}" type="hidden" /> 
+       <input class="form-control" placeholder="city" th:field="${pacientTR.city}" type="hidden" />
+       <input class="form-control" placeholder="address" th:field="${pacientTR.address}" type="hidden" /> 
+       <input class="form-control" placeholder="identityCard" th:field="${pacientTR.identityCard}" type="hidden" />
+       <input class="form-control" placeholder="identityCard" th:field="${pacientTR.phone}" type="hidden" />
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9"> CNP
+         <input class="form-control" placeholder="${CNP}" th:field="${pacientTR.cnp}" type="text" />
+         </div>
+        </div>
+		<div class="form-group">
+			<div class="col-sm-9"> First Name
+				<input class="form-control" placeholder="${Prenume}" th:field="${pacientTR.firstName}" type="text" />
 			</div>
 		</div>
-	</div>
-	
-	 <br> <br> <br> <br> <br>
-      
-   <div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container">
-          <div class="navbar-header">
-    </div></div></div>
-    <br> <br> <br> <br> <br>
-    
-</body>
-</html>
+		<div class="form-group">
+			<div class="col-sm-9">Last Name
+			 <input class="form-control" placeholder="${Nume}" th:field="${pacientTR.lastName}" type="text" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-9">Date of Visit/Control YYYY-MM-DD
+			 <input class="form-control" placeholder="Data vizitei YYYY-MM-DD" th:field="*{dateVisit}" type="text" /></div>
+			</div>
+		<div class="form-group">
+			<div class="col-sm-9">Description
+			<input class="form-control" placeholder="Descriere" th:field="*{descr}" type="text" />
+			 </div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-9">
+			<button class="btn btn-primary btn-block" type="submit">addVisitResult</button>
+			</div>
+		</div>
+</form>
+</div>
+</div>
+<br />
+<br />
+<br />
+<br />
+&nbsp;
+<div class="navbar navbar-inverse navbar-fixed-bottom">
+<div class="container">
+<div class="navbar-header">&nbsp;</div>
+</div>
+</div>
+<br />
+<br />
+<br />
+<br />
+&nbsp;</div>
+</p>

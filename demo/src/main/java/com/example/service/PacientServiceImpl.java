@@ -1,25 +1,16 @@
 package com.example.service;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
-import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.convert.JodaTimeConverters.LocalDateToDateConverter;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import com.example.model.Pacient;
 import com.example.model.Results;
-import com.example.model.Role;
-import com.example.model.User;
 import com.example.repository.PacientRepository;
 import com.example.repository.ResultsRepository;
 
@@ -97,7 +88,6 @@ public class PacientServiceImpl implements PacientService {
 	@Override
 	public List<Pacient> findAll() {
 		return  pacientRepository.findAll();
-		//return (List<Pacient>) em.createNamedQuery("findAll", Pacient.class).getResultList();
 	}
 
 	@Override
@@ -139,8 +129,9 @@ public class PacientServiceImpl implements PacientService {
 	}
 	
 	@Override
-	public List<Pacient> findPacientsSuggestedDate() {
-		return  pacientRepository.findPacientsSuggestedDate();
+	public List<Pacient> findPacientsSuggestedDate(LocalDate ld) {
+		Date date = new Date("2018-04-01");
+    		return  pacientRepository.findPacientsSuggestedDate(date);
 
 	}
 	

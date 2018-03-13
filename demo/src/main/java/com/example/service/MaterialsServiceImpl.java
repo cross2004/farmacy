@@ -6,11 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.model.Doctor;
 import com.example.model.Material;
-import com.example.model.Pacient;
-import com.example.model.Schedule;
 import com.example.repository.MaterialsRepository;
 
 

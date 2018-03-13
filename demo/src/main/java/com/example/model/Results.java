@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,9 +27,10 @@ public class Results {
 	@Column(name = "result_id")
 	private int id;
 	
-	@DateTimeFormat (pattern="yyyy-mm-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name = "dateVisit")
 	private Date dateVisit;
+	
 	
 	@Column(name = "descr")
     private String descr;

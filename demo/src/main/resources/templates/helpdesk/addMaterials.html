@@ -17,7 +17,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="logout.html">Logout</a>
+            <a class="navbar-brand" href="../logout">Logout</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -42,19 +42,22 @@
 					<h2>Registration Form</h2>
 					 <div class="form-group">									
 						<div class="col-sm-9">
+					    Details
 						<input type="text" th:field="*{details}" placeholder="details"
 								class="form-control" /> 
 						</div>				
 					</div>
-						 <div class="form-group">									
-						<div class="col-sm-9">
-						<input type="text" th:field="*{active}" placeholder="active"
+						<div class="form-group">									
+						 <div class="col-sm-9">
+						  Activ/Inactiv
+						  <input type="text" th:field="*{active}" placeholder="active"
 								class="form-control" /> 
-						</div>				
-					</div>
-						 <div class="form-group">									
+						 </div>				
+					   </div>
+					   <div class="form-group">									
 						<div class="col-sm-9">
-						<input type="text" th:field="*{quantity}" placeholder="quantity"
+						 Quantity
+						  <input type="text" th:field="*{quantity}" placeholder="quantity"
 								class="form-control" /> 
 						</div>				
 					</div>
@@ -75,5 +78,10 @@
    </div>
    </div>
  </div>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ 
 </body>
 </html>

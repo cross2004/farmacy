@@ -16,7 +16,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="logout.html">Logout</a>
+            <a class="navbar-brand" href="../logout">Logout</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -43,64 +43,59 @@
 														
 					<div class="form-group">
 						<div class="col-sm-9">
-						<label th:text="SelectatiPacientul" ></label>
-							<select th:field=*{pacientId} class="form-control" >
-                   <option th:each="Pacient : ${pacients}"
+						Select pacient:
+						<select th:field=*{pacientId} class="form-control" >
+                  		 <option th:each="Pacient : ${pacients}"
                             th:value="${Pacient.id}"
                             th:utext="${Pacient.lastName}+' '+${Pacient.firstName}"/>
-                  </select>	
-	     
-						</div></div>
-							<div class="form-group">
+                  		</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<div class="col-sm-9">
-						<input type="text" th:field="*{details}" placeholder="details"
+						 Details/Extra info
+						 <input type="text" th:field="*{details}" placeholder="details"
 								class="form-control" /> 
-						</div></div>
-					
-							<div class="form-group">
-					<div class="col-sm-9">
-						<input type="text" th:field="*{startTime}" placeholder="startTime"
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+						Start Time (yyyy-mm-dd)
+						 <input type="text" th:field="*{startTime}" placeholder="startTime YYYY-MM-DD"
 								class="form-control" /> 
-						</div></div>
-							<div class="form-group">
-		  			 <div class="col-sm-9">
-						<input type="text" th:field="*{endTime}" placeholder="endTime"
+						</div>
+					</div>
+					<div class="form-group">
+		  				<div class="col-sm-9">
+		  				End Time (yyyy-mm-dd)
+						 <input type="text" th:field="*{endTime}" placeholder="endTime YYYY-MM-DD"
 								class="form-control" /> 
-						</div></div>
-							<div class="form-group">
-					<div class="col-sm-9">
-					<label th:text="SelectatiDoctorul" ></label>				
-				<select th:field="${doctorSel.id}" class="form-control" >
-                   <option th:each="Doctor : ${doctors}"
-                            th:value="${Doctor.id}"
-                            th:utext="${Doctor.lastName}+' '+${Doctor.firstName}"/>
-                  </select>	
-	          </div>
-			</div>
-					
-		
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							Select doctor:				
+							<select th:field="${doctorSel.id}" class="form-control" >
+                   				<option th:each="Doctor : ${doctors}"
+                           			 th:value="${Doctor.id}"
+                            			th:utext="${Doctor.lastName}+' '+${Doctor.firstName}"/>
+                  			</select>	
+	          			</div>
+					</div>
 					<div class="form-group">
 						<div class="col-sm-9">
 							<button type="submit" class="btn btn-primary btn-block">Add Appointment</button>
 						</div>
 					</div>
-					
 					<span th:utext="${successMessage}"></span>
-					
-					
 				</form>
 			</div>
 		</div>
 	</div>
-	
-	
-	 
-	 <br><br><br>
+ <br><br><br>
  <div class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
           <div class="navbar-header">
     </div></div></div>
-	 
-	 
 </body>
 </html>

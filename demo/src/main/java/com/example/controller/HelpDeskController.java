@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,17 +14,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.example.model.Schedule;
-import com.example.model.User;
+
 import com.example.model.Doctor;
 import com.example.model.Material;
 import com.example.model.Pacient;
+import com.example.model.Schedule;
+import com.example.model.User;
+import com.example.service.DoctorService;
 import com.example.service.MaterialsService;
 import com.example.service.PacientService;
 import com.example.service.ScheduleService;
 import com.example.service.UserService;
-import com.example.service.DoctorService;
-
 
 @Controller
 public class HelpDeskController {
@@ -84,8 +87,8 @@ public class HelpDeskController {
 				overlap = true;
 		}
 		if (!overlap)
-		 	
-		  scheduleService.saveSchedule(schedule, doctor);
+
+			scheduleService.saveSchedule(schedule, doctor);
 		modelAndView.setViewName("helpdesk/viewScheduleAll");
 		return modelAndView;
 	}
@@ -99,8 +102,7 @@ public class HelpDeskController {
 		return modelAndView;
 	}
 
-	
-	@RequestMapping(value = {"/helpdesk/addMaterials", "/helpdesk/editMaterials"},method = RequestMethod.POST)
+	@RequestMapping(value = { "/helpdesk/addMaterials", "/helpdesk/editMaterials" }, method = RequestMethod.POST)
 	public String addMaterial(@Valid Material material, BindingResult bindingResult) {
 		materialsService.saveMaterial(material);
 		return "redirect:viewMaterials";
@@ -115,7 +117,6 @@ public class HelpDeskController {
 		return modelAndView;
 	}
 
-
 	@RequestMapping(value = "/helpdesk/helpDesk", method = RequestMethod.GET)
 	public ModelAndView helpDesk() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -124,7 +125,11 @@ public class HelpDeskController {
 		modelAndView.addObject("userName", "Bine ai venit " + user.getName() + " " + user.getLastName());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("helpdesk/helpDesk");
-		List<Pacient> pacientNext = pacientService.findPacientsSuggestedDate();
+
+		LocalDate dt = LocalDate.now().plusDays(30);
+		;
+
+		List<Pacient> pacientNext = pacientService.findPacientsSuggestedDate(dt);
 		modelAndView.addObject("findPacientsSuggestedDate", pacientNext);
 		return modelAndView;
 	}

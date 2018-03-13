@@ -2,18 +2,22 @@ package com.example.controller;
 
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.example.model.User;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.example.model.Doctor;
+import com.example.model.User;
 import com.example.service.DoctorService;
 import com.example.service.UserService;
 
@@ -46,10 +50,11 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/editUser", method = RequestMethod.POST)
 	public String editUser(@Valid Doctor doctor, BindingResult bindingResult) {
-	//	if (bindingResult.hasErrors())
-		//	logger.log(Level.SEVERE, "Edit not performed, doctor has errors!" + bindingResult.getAllErrors());
-	//	else
-			doctorService.editDoctor(doctor);
+		// if (bindingResult.hasErrors())
+		// logger.log(Level.SEVERE, "Edit not performed, doctor has errors!" +
+		// bindingResult.getAllErrors());
+		// else
+		doctorService.editDoctor(doctor);
 		return "redirect:viewUsers";
 	}
 
@@ -58,7 +63,7 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		Doctor doctor = new Doctor();
-		modelAndView.addObject("addDoctor", doctor);
+		modelAndView.addObject("Doctor", doctor);
 
 		List<User> user = userService.findAll();
 		modelAndView.addObject("addUserX", user);
@@ -73,27 +78,42 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/addUser", method = RequestMethod.POST)
-	public ModelAndView addUser(@Valid Doctor doctor, BindingResult bindingResult, User user) {
-		ModelAndView modelAndView = new ModelAndView();
+	public String addUser(@Valid  Doctor doctor, BindingResult bindingResult, User user, Model model) {
+		String modelAndView = "admin/viewUsers";
+		String modelAndView1 = "admin/addUser";
+
 		Boolean exista = false;
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName(ADDUSER);
+			User userSel = new User();
+			userSel.setId(1);
+			model.addAttribute("userSel", userSel);
+			return modelAndView1;
 		} else {
 			Doctor doctorExists = doctorService.findByCnp(doctor.getCnp());
-			if (doctorExists != null)
-				modelAndView.setViewName(ADDUSER);
+			if (doctorExists != null) {
+				model.addAttribute("errMessage", "User has null values");
+				return modelAndView1;
+			}
+
 			else {
+				//don't use romanian ever!!!!
 				exista = existaUserAsociat(user);
 				if (exista.equals(false)) {
 					User user2 = userService.findUserById(user.getId());
 					doctorService.addDoctor(doctor, user2);
+				} else {
+					bindingResult.rejectValue("users", "error.user",
+							"There is already a doctor linked to the user selected");
+					if (bindingResult.hasErrors()) {
+						return modelAndView1;
+					}
 				}
 			}
-		
-			modelAndView.setViewName("admin/viewUsers");
-			
+
+			return modelAndView;
+
 		}
-		return modelAndView;
+
 	}
 
 	public Boolean existaUserAsociat(User user) {
@@ -104,7 +124,7 @@ public class AdminController {
 				if (u.getId() == user.getId()) {
 					return true;
 				}
-			
+
 		}
 		return false;
 	}

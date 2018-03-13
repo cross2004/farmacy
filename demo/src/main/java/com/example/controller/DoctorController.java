@@ -61,8 +61,8 @@ public class DoctorController {
 	}
 
 	@RequestMapping(value = "/doctor/addNewPacient", method = RequestMethod.POST)
-	public ModelAndView addNewPacient(@Valid Pacient pacient, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView();
+	public String addNewPacient(@Valid Pacient pacient, BindingResult bindingResult) {
+		// ModelAndView modelAndView = new ModelAndView();
 
 		Pacient pacientExists = pacientService.findPacientByCnp(pacient.getCnp());
 		if (pacientExists != null) {
@@ -71,14 +71,18 @@ public class DoctorController {
 					"There is already a pacient registered with the CNP provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("doctor/addNewPacient");
+			// modelAndView.setViewName("doctor/addNewPacient");
+			return "redirect:addNewPacient";
 		} else {
 
 			pacientService.savePacient(pacient);
-			modelAndView.addObject("successMessage", "Pacient has been registered successfully");
-			modelAndView.setViewName("doctor/viewPacients");
+			// modelAndView.addObject("successMessage", "Pacient has been registered
+			// successfully");
+			// modelAndView.setViewName("doctor/viewPacients");
+			return "redirect:viewPacients";
 		}
-		return modelAndView;
+		// return modelAndView;
+		// return "redirect:viewPacients";
 	}
 
 	@RequestMapping(value = "/doctor/editPacient", method = RequestMethod.GET)

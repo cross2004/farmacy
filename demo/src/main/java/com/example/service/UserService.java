@@ -13,4 +13,5 @@ public interface UserService {
 	public User findUserById(int id);
 	public List<User> findAll() ;
 	public void saveUser(User user, Role role);
+	public Role findRoleById(int id);
 }

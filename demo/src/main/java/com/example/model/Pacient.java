@@ -20,8 +20,6 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "findAll", query = "SELECT p FROM Pacient p") })
-
 @Table(name = "pacient")
 public class Pacient {
 	@Id
@@ -81,7 +79,7 @@ public class Pacient {
 	@Column(name = "lastDate")
 	private Date lastDate;
 
-	@DateTimeFormat (pattern="yyyy-mm-dd")
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	@Column(name = "suggestedDate")
 	private Date suggestedDate;
 

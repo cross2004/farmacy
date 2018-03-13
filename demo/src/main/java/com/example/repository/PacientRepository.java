@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,12 +16,11 @@ public interface PacientRepository  extends JpaRepository<Pacient, Long> {
 	Pacient findByCnp(String cnp);
 	List<Pacient> findAll();
 	@Query("SELECT r FROM Results r")
-	//where r.id in (select pr.results_id from pacient_results pr where pr.pacient_id = :id)")
 	Results viewVisitResults(@Param("id") int id);
 	@Query("SELECT p FROM Pacient p inner join p.results where p.id = :id")
 	Pacient viewVisitResults2(@Param("id") int id);
 	@Query("SELECT p FROM Pacient p where p.id= :id")
 	Pacient editPacient(@Param("id") int id);
-	@Query("SELECT p FROM Pacient p where p.suggestedDate > CURDATE() and p.suggestedDate< (CURDATE()+ 5) ")
-	List<Pacient> findPacientsSuggestedDate();
+	@Query("SELECT p FROM Pacient p where p.suggestedDate > CURDATE() ")
+	List<Pacient> findPacientsSuggestedDate(Date dt);
 }

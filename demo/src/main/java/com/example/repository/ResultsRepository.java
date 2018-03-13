@@ -17,6 +17,5 @@ public interface ResultsRepository  extends JpaRepository<Pacient, Long> {
 	void save(Results result);
 	@Query("SELECT r FROM Results r where r.id= :id")
 	Results getResults(@Param("id") int id);
-	//@Query("insert into pacient_results(pacient_id,results_id) select :id1,:id2 from dual")
-	//void insert(int id1, int id2);
+	
 }
