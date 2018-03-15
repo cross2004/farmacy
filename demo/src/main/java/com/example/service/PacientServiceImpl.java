@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -132,9 +133,10 @@ public class PacientServiceImpl implements PacientService {
 	public List<Pacient> findPacientsSuggestedDate() {
 		LocalDate dt = LocalDate.now();//.plusDays(30);
 		
-    		return  pacientRepository.findPacientsSuggestedDate();
-
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, 30);  //
+		Date today =c.getTime();
+		int id =0;
+		return  pacientRepository.findPacientsSuggestedDate(today);
 	}
-	
-	
 }
